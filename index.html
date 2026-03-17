@@ -1,0 +1,808 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Bruna Lacroix — Portfólio</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --bg: #08080A;
+      --bg-card: #0F0F12;
+      --bg-elevated: #151518;
+      --text: #EDE8DD;
+      --text-secondary: #9A9288;
+      --text-muted: #504A44;
+      --accent: #C19A4D;
+      --accent-hover: #D4AF6A;
+      --border: rgba(237,232,221,0.07);
+      --border-strong: rgba(237,232,221,0.13);
+      --font-display: 'Cormorant Garamond', serif;
+      --font-body: 'Outfit', sans-serif;
+      --nav-h: 68px;
+      --pad: clamp(24px, 5vw, 80px);
+      --section-pad: clamp(80px, 10vw, 140px);
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: var(--font-body);
+      font-weight: 300;
+      line-height: 1.6;
+      overflow-x: hidden;
+      cursor: none;
+    }
+
+    /* GRAIN */
+    body::after {
+      content: '';
+      position: fixed;
+      inset: -200%;
+      width: 400%; height: 400%;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+      opacity: 0.032;
+      pointer-events: none;
+      z-index: 10000;
+      animation: grain 12s steps(10) infinite;
+    }
+    @keyframes grain {
+      0%   { transform: translate(0,0); }
+      10%  { transform: translate(-5%,-10%); }
+      20%  { transform: translate(-15%,5%); }
+      30%  { transform: translate(7%,-25%); }
+      40%  { transform: translate(-5%,25%); }
+      50%  { transform: translate(-15%,10%); }
+      60%  { transform: translate(15%,0%); }
+      70%  { transform: translate(0%,15%); }
+      80%  { transform: translate(3%,35%); }
+      90%  { transform: translate(-10%,10%); }
+      100% { transform: translate(0,0); }
+    }
+
+    /* CURSOR */
+    .cursor {
+      position: fixed; width: 7px; height: 7px;
+      background: var(--accent); border-radius: 50%;
+      pointer-events: none; z-index: 9999;
+      transform: translate(-50%,-50%);
+      transition: transform 0.1s ease;
+    }
+    .cursor-ring {
+      position: fixed; width: 32px; height: 32px;
+      border: 1px solid rgba(193,154,77,0.35); border-radius: 50%;
+      pointer-events: none; z-index: 9998;
+      transform: translate(-50%,-50%);
+      transition: width 0.3s ease, height 0.3s ease, opacity 0.3s ease;
+    }
+    .cursor-ring.enlarged { width: 50px; height: 50px; opacity: 0.5; }
+
+    /* NAV */
+    #nav {
+      position: fixed; top: 0; left: 0; right: 0;
+      z-index: 1000; height: var(--nav-h);
+      padding: 0 var(--pad);
+      display: flex; align-items: center; justify-content: space-between;
+      transition: background 0.4s ease, backdrop-filter 0.4s ease, border-color 0.4s ease;
+      border-bottom: 1px solid transparent;
+    }
+    #nav.scrolled {
+      background: rgba(8,8,10,0.88);
+      backdrop-filter: blur(20px);
+      border-color: var(--border);
+    }
+    .nav-logo {
+      font-family: var(--font-display);
+      font-size: 1.35rem; font-weight: 600;
+      letter-spacing: 0.12em; color: var(--text);
+      text-decoration: none; cursor: none;
+    }
+    .nav-links { display: flex; gap: 36px; list-style: none; }
+    .nav-links a {
+      font-size: 0.72rem; letter-spacing: 0.16em;
+      text-transform: uppercase; color: var(--text-secondary);
+      text-decoration: none; cursor: none;
+      transition: color 0.3s;
+      position: relative;
+    }
+    .nav-links a::after {
+      content: ''; position: absolute; bottom: -2px; left: 0;
+      width: 0; height: 1px; background: var(--accent);
+      transition: width 0.3s ease;
+    }
+    .nav-links a:hover { color: var(--text); }
+    .nav-links a:hover::after { width: 100%; }
+    .nav-cta {
+      color: var(--accent) !important;
+      border: 1px solid rgba(193,154,77,0.3);
+      padding: 7px 18px; border-radius: 2px;
+      transition: background 0.3s ease !important;
+    }
+    .nav-cta::after { display: none !important; }
+    .nav-cta:hover { background: var(--accent) !important; color: var(--bg) !important; }
+
+    /* HERO */
+    #hero {
+      min-height: 100vh; padding: var(--nav-h) var(--pad) 60px;
+      display: flex; flex-direction: column; justify-content: center;
+      position: relative; overflow: hidden;
+    }
+    .hero-rule {
+      position: absolute; top: var(--nav-h); left: var(--pad); right: var(--pad);
+      height: 1px; background: var(--border);
+    }
+    .hero-eyebrow {
+      font-size: 0.7rem; letter-spacing: 0.24em;
+      text-transform: uppercase; color: var(--accent);
+      margin-bottom: 28px;
+      opacity: 0; animation: fadeUp 0.8s ease 0.3s forwards;
+    }
+    .hero-name {
+      font-family: var(--font-display);
+      font-size: clamp(72px, 14vw, 190px);
+      font-weight: 300; line-height: 0.88;
+      letter-spacing: -0.02em;
+      margin-bottom: 36px;
+    }
+    .hero-name-line {
+      display: block; overflow: hidden; padding-bottom: 0.06em;
+    }
+    .hero-name-line span {
+      display: inline-block;
+      opacity: 0; transform: translateY(110%);
+    }
+    .hero-mid {
+      display: flex; align-items: center; gap: 24px;
+      margin-bottom: 48px;
+      opacity: 0; animation: fadeUp 0.8s ease 1.2s forwards;
+    }
+    .hero-rule-sm { width: 180px; height: 1px; background: var(--border-strong); }
+    .hero-role {
+      font-family: var(--font-display); font-style: italic;
+      font-size: clamp(0.95rem, 2vw, 1.35rem);
+      font-weight: 300; color: var(--text-secondary); letter-spacing: 0.02em;
+    }
+    .hero-bottom {
+      display: flex; align-items: flex-end; justify-content: space-between;
+      gap: 32px;
+      opacity: 0; animation: fadeUp 0.8s ease 1.5s forwards;
+    }
+    .hero-tagline {
+      max-width: 360px; font-size: 0.9rem;
+      font-weight: 300; line-height: 1.8; color: var(--text-secondary);
+    }
+    .hero-cta {
+      display: inline-flex; align-items: center; gap: 10px;
+      font-size: 0.75rem; letter-spacing: 0.18em;
+      text-transform: uppercase; color: var(--text);
+      text-decoration: none; cursor: none; white-space: nowrap;
+      transition: gap 0.3s ease, color 0.3s ease;
+    }
+    .hero-cta-line { width: 40px; height: 1px; background: var(--accent); transition: width 0.3s ease; }
+    .hero-cta:hover { color: var(--accent); gap: 16px; }
+    .hero-cta:hover .hero-cta-line { width: 60px; }
+    .hero-bg-text {
+      position: absolute; right: var(--pad); top: 50%;
+      transform: translateY(-50%);
+      font-family: var(--font-display);
+      font-size: clamp(160px, 25vw, 340px);
+      font-weight: 300; line-height: 1;
+      color: rgba(237,232,221,0.018);
+      pointer-events: none; user-select: none;
+    }
+    .scroll-indicator {
+      position: absolute; bottom: 48px; right: var(--pad);
+      display: flex; flex-direction: column; align-items: center; gap: 10px;
+      opacity: 0; animation: fadeIn 1s ease 2.2s forwards;
+    }
+    .scroll-label {
+      font-size: 0.62rem; letter-spacing: 0.3em;
+      text-transform: uppercase; color: var(--text-muted);
+      writing-mode: vertical-rl;
+    }
+    .scroll-line {
+      width: 1px; height: 56px;
+      background: linear-gradient(to bottom, var(--accent), transparent);
+      animation: scrollPulse 2.2s ease-in-out infinite;
+    }
+    @keyframes scrollPulse {
+      0%,100% { opacity: 0.3; transform: scaleY(1); }
+      50% { opacity: 1; transform: scaleY(1.15); }
+    }
+
+    /* SECTION BASE */
+    section { padding: var(--section-pad) var(--pad); }
+    .section-label {
+      font-size: 0.67rem; letter-spacing: 0.26em;
+      text-transform: uppercase; color: var(--accent);
+      margin-bottom: 14px;
+      display: flex; align-items: center; gap: 14px;
+    }
+    .section-label::before {
+      content: ''; display: inline-block;
+      width: 22px; height: 1px; background: var(--accent);
+    }
+    .section-title {
+      font-family: var(--font-display);
+      font-size: clamp(2.4rem, 5.5vw, 4.8rem);
+      font-weight: 300; line-height: 1.05;
+      letter-spacing: -0.01em; color: var(--text);
+      margin-bottom: clamp(48px, 6vw, 80px);
+    }
+    .section-title em { font-style: italic; }
+
+    /* REVEAL */
+    .reveal {
+      opacity: 0; transform: translateY(28px);
+      transition: opacity 0.8s ease, transform 0.8s ease;
+    }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+    .d1 { transition-delay: 0.1s; }
+    .d2 { transition-delay: 0.2s; }
+    .d3 { transition-delay: 0.3s; }
+    .d4 { transition-delay: 0.4s; }
+
+    /* ABOUT */
+    #sobre { border-top: 1px solid var(--border); }
+    .about-grid {
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: clamp(40px,6vw,100px); align-items: start;
+    }
+    .about-text p {
+      font-size: clamp(0.95rem, 1.4vw, 1.1rem);
+      font-weight: 300; line-height: 1.85;
+      color: var(--text-secondary); margin-bottom: 20px;
+    }
+    .about-text p strong { color: var(--text); font-weight: 500; }
+    .about-sig {
+      font-family: var(--font-display); font-style: italic;
+      font-size: 1.9rem; font-weight: 400;
+      color: var(--text); margin-top: 40px;
+    }
+    .about-stats { display: grid; grid-template-columns: 1fr 1fr; gap: 2px; }
+    .stat {
+      background: var(--bg-card); padding: 32px 26px;
+      border: 1px solid var(--border);
+      transition: border-color 0.3s ease;
+    }
+    .stat:hover { border-color: var(--border-strong); }
+    .stat-n {
+      font-family: var(--font-display);
+      font-size: clamp(2.4rem, 4.5vw, 3.8rem);
+      font-weight: 300; color: var(--text); line-height: 1; margin-bottom: 8px;
+    }
+    .stat-n sup { font-size: 0.42em; font-family: var(--font-body); color: var(--accent); vertical-align: super; }
+    .stat-l { font-size: 0.72rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-muted); }
+
+    /* CASES */
+    #cases { border-top: 1px solid var(--border); background: var(--bg-card); }
+    .cases-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2px; }
+    .case-card {
+      position: relative; overflow: hidden;
+      cursor: none; aspect-ratio: 4/3;
+      background: var(--bg-elevated);
+    }
+    .case-visual {
+      position: absolute; inset: 0; opacity: 0.14;
+      transition: opacity 0.6s ease, transform 0.6s cubic-bezier(0.16,1,0.3,1);
+    }
+    .case-card:hover .case-visual { opacity: 0.38; transform: scale(1.06); }
+    .c1 .case-visual { background: radial-gradient(ellipse at 20% 80%, #C19A4D 0%, transparent 60%), radial-gradient(ellipse at 80% 20%, #5A7FA0 0%, transparent 60%); }
+    .c2 .case-visual { background: radial-gradient(ellipse at 80% 80%, #8B4A6B 0%, transparent 60%), radial-gradient(ellipse at 20% 20%, #C19A4D 0%, transparent 60%); }
+    .c3 .case-visual { background: radial-gradient(ellipse at 50% 20%, #4A8B6B 0%, transparent 60%), radial-gradient(ellipse at 80% 80%, #8B7A4A 0%, transparent 60%); }
+    .c4 .case-visual { background: radial-gradient(ellipse at 20% 30%, #6B4A8B 0%, transparent 60%), radial-gradient(ellipse at 80% 70%, #4A6B8B 0%, transparent 60%); }
+    .case-inner {
+      position: absolute; inset: 0; padding: 36px;
+      display: flex; flex-direction: column; justify-content: space-between;
+      transition: transform 0.6s cubic-bezier(0.16,1,0.3,1);
+    }
+    .case-card:hover .case-inner { transform: translateY(-6px); }
+    .case-top { display: flex; justify-content: space-between; align-items: center; }
+    .case-num {
+      font-family: var(--font-display); font-size: 0.82rem;
+      font-weight: 500; letter-spacing: 0.14em; color: var(--accent);
+    }
+    .case-tag {
+      font-size: 0.62rem; letter-spacing: 0.18em;
+      text-transform: uppercase; color: var(--text-muted);
+      border: 1px solid var(--border-strong); padding: 4px 10px; border-radius: 2px;
+    }
+    .case-title {
+      font-family: var(--font-display);
+      font-size: clamp(1.3rem, 2.5vw, 2rem);
+      font-weight: 300; line-height: 1.15; color: var(--text); margin-bottom: 10px;
+    }
+    .case-desc {
+      font-size: 0.82rem; font-weight: 300;
+      line-height: 1.65; color: var(--text-secondary);
+      max-width: 340px; opacity: 0; transform: translateY(8px);
+      transition: opacity 0.4s ease 0.1s, transform 0.4s ease 0.1s;
+    }
+    .case-card:hover .case-desc { opacity: 1; transform: translateY(0); }
+    .case-link {
+      display: inline-flex; align-items: center; gap: 8px;
+      font-size: 0.7rem; letter-spacing: 0.18em;
+      text-transform: uppercase; color: var(--accent);
+      text-decoration: none; cursor: none; margin-top: 12px;
+      opacity: 0; transform: translateY(8px);
+      transition: opacity 0.4s ease 0.18s, transform 0.4s ease 0.18s, gap 0.3s ease;
+    }
+    .case-card:hover .case-link { opacity: 1; transform: translateY(0); }
+    .case-link:hover { gap: 14px; }
+    .case-link-line { width: 22px; height: 1px; background: var(--accent); }
+
+    /* SKILLS */
+    #skills { border-top: 1px solid var(--border); }
+    .skills-layout {
+      display: grid; grid-template-columns: 1fr 2fr;
+      gap: clamp(40px,6vw,100px); align-items: start;
+    }
+    .skills-intro {
+      font-size: 0.9rem; font-weight: 300;
+      line-height: 1.8; color: var(--text-secondary);
+      position: sticky; top: calc(var(--nav-h) + 40px);
+    }
+    .skill-item {
+      display: flex; align-items: center;
+      justify-content: space-between;
+      padding: 22px 0; border-bottom: 1px solid var(--border);
+      cursor: default;
+      transition: padding-left 0.3s ease;
+    }
+    .skill-item:hover { padding-left: 14px; }
+    .skill-item:hover .skill-name { color: var(--text); }
+    .skill-left { display: flex; align-items: center; gap: 18px; }
+    .skill-idx {
+      font-family: var(--font-display); font-size: 0.75rem;
+      color: var(--text-muted); width: 26px; flex-shrink: 0;
+    }
+    .skill-name {
+      font-family: var(--font-display);
+      font-size: clamp(1.1rem, 2.2vw, 1.7rem);
+      font-weight: 400; color: var(--text-secondary);
+      letter-spacing: 0.01em;
+      transition: color 0.3s ease;
+    }
+    .skill-right { display: flex; align-items: center; gap: 14px; }
+    .skill-bar { width: 76px; height: 1px; background: var(--border-strong); overflow: hidden; }
+    .skill-fill {
+      height: 100%; background: var(--accent);
+      width: 0%;
+      transition: width 0.9s cubic-bezier(0.16,1,0.3,1) 0.35s;
+    }
+    .skill-item.visible .skill-fill { width: var(--w, 90%); }
+    .skill-cat {
+      font-size: 0.62rem; letter-spacing: 0.14em;
+      text-transform: uppercase; color: var(--text-muted);
+    }
+
+    /* TESTIMONIALS */
+    #depoimentos { border-top: 1px solid var(--border); background: var(--bg-card); }
+    .test-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2px; }
+    .test-card {
+      background: var(--bg-elevated);
+      padding: 44px 36px;
+      border: 1px solid var(--border);
+      transition: border-color 0.3s ease, transform 0.35s ease;
+    }
+    .test-card:hover { border-color: var(--border-strong); transform: translateY(-5px); }
+    .test-quote-mark {
+      font-family: var(--font-display); font-size: 5.5rem;
+      font-weight: 300; color: var(--accent); opacity: 0.18;
+      line-height: 0.8; margin-bottom: 22px; display: block;
+    }
+    .test-text {
+      font-family: var(--font-display); font-style: italic;
+      font-size: clamp(0.95rem, 1.4vw, 1.15rem);
+      font-weight: 300; line-height: 1.75;
+      color: var(--text-secondary); margin-bottom: 32px;
+    }
+    .test-author { display: flex; align-items: center; gap: 14px; }
+    .test-avatar {
+      width: 42px; height: 42px; border-radius: 50%;
+      background: var(--bg-card); border: 1px solid var(--border-strong);
+      display: flex; align-items: center; justify-content: center;
+      font-family: var(--font-display); font-size: 1rem;
+      font-weight: 500; color: var(--accent); flex-shrink: 0;
+    }
+    .test-name { font-size: 0.83rem; font-weight: 500; color: var(--text); margin-bottom: 2px; }
+    .test-role { font-size: 0.7rem; letter-spacing: 0.08em; color: var(--text-muted); }
+
+    /* CONTACT */
+    #contato {
+      border-top: 1px solid var(--border);
+      min-height: 58vh; display: flex; align-items: center;
+    }
+    .contact-inner { width: 100%; }
+    .contact-title {
+      font-family: var(--font-display);
+      font-size: clamp(2.8rem, 7.5vw, 7.5rem);
+      font-weight: 300; line-height: 1;
+      letter-spacing: -0.02em; color: var(--text);
+      margin-bottom: 52px;
+    }
+    .contact-title em { font-style: italic; color: var(--accent); }
+    .contact-links { display: flex; gap: 36px; align-items: center; flex-wrap: wrap; }
+    .contact-link {
+      display: flex; align-items: center; gap: 12px;
+      font-size: 0.74rem; letter-spacing: 0.16em;
+      text-transform: uppercase; color: var(--text-secondary);
+      text-decoration: none; cursor: none;
+      transition: color 0.3s ease, gap 0.3s ease;
+    }
+    .cl-icon {
+      width: 38px; height: 38px; border-radius: 50%;
+      border: 1px solid var(--border-strong);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 0.75rem; transition: background 0.3s ease, border-color 0.3s ease, color 0.3s ease;
+    }
+    .contact-link:hover { color: var(--text); gap: 16px; }
+    .contact-link:hover .cl-icon { background: var(--accent); border-color: var(--accent); color: var(--bg); }
+    .cl-sep { width: 1px; height: 22px; background: var(--border-strong); }
+
+    /* FOOTER */
+    footer {
+      padding: 36px var(--pad); border-top: 1px solid var(--border);
+      display: flex; align-items: center; justify-content: space-between;
+    }
+    .footer-logo {
+      font-family: var(--font-display); font-size: 1.15rem;
+      font-weight: 500; letter-spacing: 0.12em; color: var(--text);
+    }
+    .footer-copy { font-size: 0.7rem; letter-spacing: 0.08em; color: var(--text-muted); }
+    .footer-top {
+      font-size: 0.7rem; letter-spacing: 0.14em;
+      text-transform: uppercase; color: var(--text-secondary);
+      text-decoration: none; cursor: none;
+      transition: color 0.3s ease;
+    }
+    .footer-top:hover { color: var(--accent); }
+
+    /* KEYFRAMES */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(18px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+    @keyframes letterIn {
+      from { opacity: 0; transform: translateY(110%); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* RESPONSIVE */
+    @media (max-width: 1024px) {
+      .test-grid { grid-template-columns: 1fr 1fr; }
+      .test-grid .test-card:last-child { grid-column: span 2; }
+      .skills-layout { grid-template-columns: 1fr; gap: 44px; }
+      .skills-intro { position: static; }
+    }
+    @media (max-width: 768px) {
+      .nav-links { display: none; }
+      .about-grid, .cases-grid, .test-grid { grid-template-columns: 1fr; }
+      .test-grid .test-card:last-child { grid-column: span 1; }
+      .hero-bottom { flex-direction: column; align-items: flex-start; }
+      .contact-links { flex-direction: column; align-items: flex-start; gap: 22px; }
+      .cl-sep { display: none; }
+      footer { flex-direction: column; gap: 14px; text-align: center; }
+      .cursor, .cursor-ring { display: none; }
+      body, a, button { cursor: auto; }
+    }
+    @media (max-width: 480px) {
+      .about-stats { grid-template-columns: 1fr 1fr; }
+      .case-card { aspect-ratio: 3/2; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="cursor" id="cursor"></div>
+  <div class="cursor-ring" id="cursorRing"></div>
+
+  <!-- NAV -->
+  <nav id="nav">
+    <a href="#hero" class="nav-logo" style="text-decoration:none;cursor:none;">BL</a>
+    <ul class="nav-links">
+      <li><a href="#sobre">Sobre</a></li>
+      <li><a href="#cases">Cases</a></li>
+      <li><a href="#skills">Skills</a></li>
+      <li><a href="#depoimentos">Depoimentos</a></li>
+      <li><a href="#contato" class="nav-cta">Contato</a></li>
+    </ul>
+  </nav>
+
+  <!-- HERO -->
+  <section id="hero">
+    <div class="hero-rule"></div>
+    <p class="hero-eyebrow">Portfólio — 2025</p>
+    <h1 class="hero-name">
+      <span class="hero-name-line" id="hl1">
+        <span>B</span><span>R</span><span>U</span><span>N</span><span>A</span>
+      </span>
+      <span class="hero-name-line" id="hl2">
+        <span>L</span><span>A</span><span>C</span><span>R</span><span>O</span><span>I</span><span>X</span>
+      </span>
+    </h1>
+    <div class="hero-mid">
+      <div class="hero-rule-sm"></div>
+      <p class="hero-role">Design Estratégico · Branding · UX/UI</p>
+    </div>
+    <div class="hero-bottom">
+      <p class="hero-tagline">Criando experiências que conectam marcas e pessoas através do design intencional e estratégia criativa.</p>
+      <a href="#cases" class="hero-cta">
+        <span>Ver Cases</span>
+        <span class="hero-cta-line"></span>
+        <span>→</span>
+      </a>
+    </div>
+    <div class="scroll-indicator">
+      <span class="scroll-label">Scroll</span>
+      <div class="scroll-line"></div>
+    </div>
+    <div class="hero-bg-text" aria-hidden="true">BL</div>
+  </section>
+
+  <!-- SOBRE -->
+  <section id="sobre">
+    <div class="section-label reveal">Sobre Mim</div>
+    <h2 class="section-title reveal">Onde estratégia<br>encontra <em>criatividade</em></h2>
+    <div class="about-grid">
+      <div class="about-text reveal d1">
+        <p>Sou designer e estrategista criativa com mais de <strong>7 anos de experiência</strong> transformando desafios de negócios em soluções visuais que geram resultado. Acredito que o bom design não é apenas belo — ele resolve problemas.</p>
+        <p>Minha abordagem combina <strong>pesquisa profunda</strong>, pensamento estratégico e execução criativa refinada para entregar projetos que não apenas impressionam visualmente, mas criam <strong>impacto real</strong> para as marcas que atendo.</p>
+        <p>Do briefing ao entregável final, estou comprometida com a excelência em cada detalhe.</p>
+        <div class="about-sig">Bruna Lacroix</div>
+      </div>
+      <div class="about-stats reveal d2">
+        <div class="stat">
+          <div class="stat-n">7<sup>+</sup></div>
+          <div class="stat-l">Anos de Experiência</div>
+        </div>
+        <div class="stat">
+          <div class="stat-n">80<sup>+</sup></div>
+          <div class="stat-l">Projetos Entregues</div>
+        </div>
+        <div class="stat">
+          <div class="stat-n">45<sup>+</sup></div>
+          <div class="stat-l">Clientes Atendidos</div>
+        </div>
+        <div class="stat">
+          <div class="stat-n">12<sup>+</sup></div>
+          <div class="stat-l">Prêmios & Menções</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CASES -->
+  <section id="cases">
+    <div class="section-label reveal">Cases</div>
+    <h2 class="section-title reveal">Trabalhos<br><em>selecionados</em></h2>
+    <div class="cases-grid">
+
+      <div class="case-card c1 reveal">
+        <div class="case-visual"></div>
+        <div class="case-inner">
+          <div class="case-top">
+            <span class="case-num">01</span>
+            <span class="case-tag">Branding</span>
+          </div>
+          <div>
+            <h3 class="case-title">Renova Estúdio —<br>Identidade Visual</h3>
+            <p class="case-desc">Rebranding completo para estúdio de arquitetura, elevando o posicionamento de mercado e aumentando o reconhecimento da marca em 60%.</p>
+            <a href="#" class="case-link">Ver Case <span class="case-link-line"></span> →</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="case-card c2 reveal d1">
+        <div class="case-visual"></div>
+        <div class="case-inner">
+          <div class="case-top">
+            <span class="case-num">02</span>
+            <span class="case-tag">UX/UI Design</span>
+          </div>
+          <div>
+            <h3 class="case-title">Flora App —<br>Redesign de Produto</h3>
+            <p class="case-desc">Redesign da experiência completa de um app de bem-estar, resultando em 45% de aumento nas conversões e redução do churn em 30%.</p>
+            <a href="#" class="case-link">Ver Case <span class="case-link-line"></span> →</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="case-card c3 reveal d2">
+        <div class="case-visual"></div>
+        <div class="case-inner">
+          <div class="case-top">
+            <span class="case-num">03</span>
+            <span class="case-tag">Marketing Digital</span>
+          </div>
+          <div>
+            <h3 class="case-title">Verda Market —<br>Campanha 360°</h3>
+            <p class="case-desc">Estratégia de conteúdo e campanha digital para e-commerce sustentável, gerando 300% de crescimento orgânico em 6 meses.</p>
+            <a href="#" class="case-link">Ver Case <span class="case-link-line"></span> →</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="case-card c4 reveal d3">
+        <div class="case-visual"></div>
+        <div class="case-inner">
+          <div class="case-top">
+            <span class="case-num">04</span>
+            <span class="case-tag">Estratégia de Marca</span>
+          </div>
+          <div>
+            <h3 class="case-title">Lumina Capital —<br>Posicionamento Premium</h3>
+            <p class="case-desc">Desenvolvimento de estratégia de marca e comunicação para gestora de investimentos entrando no segmento de alta renda.</p>
+            <a href="#" class="case-link">Ver Case <span class="case-link-line"></span> →</a>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- SKILLS -->
+  <section id="skills">
+    <div class="section-label reveal">Habilidades</div>
+    <h2 class="section-title reveal">Ferramentas &<br><em>especialidades</em></h2>
+    <div class="skills-layout">
+      <div class="skills-intro reveal">
+        <p>Minha caixa de ferramentas é ampla e em constante evolução. Combino habilidades técnicas com uma visão estratégica apurada para entregar soluções completas.</p>
+        <br>
+        <p>Cada projeto é uma oportunidade de aplicar o conjunto certo de competências para alcançar o resultado desejado.</p>
+      </div>
+      <div>
+        <div class="skill-item reveal"      > <div class="skill-left"><span class="skill-idx">01</span><span class="skill-name">Branding & Identidade Visual</span></div> <div class="skill-right"><div class="skill-bar"><div class="skill-fill" style="--w:95%"></div></div><span class="skill-cat">Design</span></div> </div>
+        <div class="skill-item reveal d1"   > <div class="skill-left"><span class="skill-idx">02</span><span class="skill-name">UX/UI Design</span></div> <div class="skill-right"><div class="skill-bar"><div class="skill-fill" style="--w:90%"></div></div><span class="skill-cat">Design</span></div> </div>
+        <div class="skill-item reveal d2"   > <div class="skill-left"><span class="skill-idx">03</span><span class="skill-name">Estratégia de Conteúdo</span></div> <div class="skill-right"><div class="skill-bar"><div class="skill-fill" style="--w:85%"></div></div><span class="skill-cat">Marketing</span></div> </div>
+        <div class="skill-item reveal d3"   > <div class="skill-left"><span class="skill-idx">04</span><span class="skill-name">Design Thinking</span></div> <div class="skill-right"><div class="skill-bar"><div class="skill-fill" style="--w:93%"></div></div><span class="skill-cat">Metodologia</span></div> </div>
+        <div class="skill-item reveal d4"   > <div class="skill-left"><span class="skill-idx">05</span><span class="skill-name">Marketing Digital</span></div> <div class="skill-right"><div class="skill-bar"><div class="skill-fill" style="--w:80%"></div></div><span class="skill-cat">Marketing</span></div> </div>
+        <div class="skill-item reveal"      > <div class="skill-left"><span class="skill-idx">06</span><span class="skill-name">Figma & Adobe Suite</span></div> <div class="skill-right"><div class="skill-bar"><div class="skill-fill" style="--w:97%"></div></div><span class="skill-cat">Ferramentas</span></div> </div>
+        <div class="skill-item reveal d1"   > <div class="skill-left"><span class="skill-idx">07</span><span class="skill-name">Gestão de Projetos</span></div> <div class="skill-right"><div class="skill-bar"><div class="skill-fill" style="--w:78%"></div></div><span class="skill-cat">Gestão</span></div> </div>
+        <div class="skill-item reveal d2"   > <div class="skill-left"><span class="skill-idx">08</span><span class="skill-name">Motion Design</span></div> <div class="skill-right"><div class="skill-bar"><div class="skill-fill" style="--w:68%"></div></div><span class="skill-cat">Design</span></div> </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- DEPOIMENTOS -->
+  <section id="depoimentos">
+    <div class="section-label reveal">Depoimentos</div>
+    <h2 class="section-title reveal">O que dizem<br>os <em>clientes</em></h2>
+    <div class="test-grid">
+      <div class="test-card reveal">
+        <span class="test-quote-mark">"</span>
+        <p class="test-text">A Bruna transformou completamente a forma como nossa marca se comunica. O processo foi incrivelmente fluido e o resultado superou todas as expectativas. Nossa identidade agora traduz exatamente quem somos.</p>
+        <div class="test-author">
+          <div class="test-avatar">AM</div>
+          <div>
+            <div class="test-name">Ana Martins</div>
+            <div class="test-role">Fundadora, Renova Estúdio</div>
+          </div>
+        </div>
+      </div>
+      <div class="test-card reveal d1">
+        <span class="test-quote-mark">"</span>
+        <p class="test-text">Trabalhar com a Bruna foi uma experiência transformadora. Ela não só entende de design — ela entende de negócios. O redesign do app mudou completamente nossos números de retenção e conversão.</p>
+        <div class="test-author">
+          <div class="test-avatar">RC</div>
+          <div>
+            <div class="test-name">Ricardo Costa</div>
+            <div class="test-role">CEO, Flora Digital</div>
+          </div>
+        </div>
+      </div>
+      <div class="test-card reveal d2">
+        <span class="test-quote-mark">"</span>
+        <p class="test-text">Impressionante como a Bruna capturou a essência premium da nossa gestora em cada detalhe. A estratégia de marca que ela desenvolveu nos ajudou a conquistar exatamente o segmento que queríamos atingir.</p>
+        <div class="test-author">
+          <div class="test-avatar">PF</div>
+          <div>
+            <div class="test-name">Paulo Ferreira</div>
+            <div class="test-role">Sócio-Diretor, Lumina Capital</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTATO -->
+  <section id="contato">
+    <div class="contact-inner">
+      <h2 class="contact-title reveal">Vamos criar<br><em>juntos?</em></h2>
+      <div class="contact-links reveal d1">
+        <a href="mailto:bruna@brunalacroix.com" class="contact-link">
+          <span class="cl-icon">@</span>
+          <span>bruna@brunalacroix.com</span>
+        </a>
+        <div class="cl-sep"></div>
+        <a href="#" class="contact-link">
+          <span class="cl-icon">in</span>
+          <span>LinkedIn</span>
+        </a>
+        <div class="cl-sep"></div>
+        <a href="#" class="contact-link">
+          <span class="cl-icon">ig</span>
+          <span>Instagram</span>
+        </a>
+        <div class="cl-sep"></div>
+        <a href="#" class="contact-link">
+          <span class="cl-icon">be</span>
+          <span>Behance</span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <span class="footer-logo">Bruna Lacroix</span>
+    <span class="footer-copy">© 2025 — Todos os direitos reservados</span>
+    <a href="#hero" class="footer-top">↑ Topo</a>
+  </footer>
+
+  <script>
+    // Custom Cursor
+    const cursor = document.getElementById('cursor');
+    const ring   = document.getElementById('cursorRing');
+    let mx = 0, my = 0, rx = 0, ry = 0;
+
+    document.addEventListener('mousemove', e => {
+      mx = e.clientX; my = e.clientY;
+      cursor.style.left = mx + 'px';
+      cursor.style.top  = my + 'px';
+    });
+
+    document.querySelectorAll('a, button').forEach(el => {
+      el.addEventListener('mouseenter', () => ring.classList.add('enlarged'));
+      el.addEventListener('mouseleave', () => ring.classList.remove('enlarged'));
+    });
+
+    (function followRing() {
+      rx += (mx - rx) * 0.11;
+      ry += (my - ry) * 0.11;
+      ring.style.left = rx + 'px';
+      ring.style.top  = ry + 'px';
+      requestAnimationFrame(followRing);
+    })();
+
+    // Nav on scroll
+    const nav = document.getElementById('nav');
+    window.addEventListener('scroll', () => {
+      nav.classList.toggle('scrolled', window.scrollY > 50);
+    });
+
+    // Hero letter animation
+    ['hl1','hl2'].forEach((id, lineIdx) => {
+      document.querySelectorAll(`#${id} span`).forEach((s, i) => {
+        setTimeout(() => {
+          s.style.animation = 'letterIn 0.7s cubic-bezier(0.16,1,0.3,1) forwards';
+        }, lineIdx * 180 + i * 55 + 350);
+      });
+    });
+
+    // Scroll reveal
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(e => {
+        if (e.isIntersecting) e.target.classList.add('visible');
+      });
+    }, { threshold: 0.12, rootMargin: '0px 0px -36px 0px' });
+
+    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+    // Smooth anchor links
+    document.querySelectorAll('a[href^="#"]').forEach(a => {
+      a.addEventListener('click', e => {
+        const t = document.querySelector(a.getAttribute('href'));
+        if (t) { e.preventDefault(); t.scrollIntoView({ behavior: 'smooth' }); }
+      });
+    });
+  </script>
+</body>
+</html>
