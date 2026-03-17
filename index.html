@@ -505,6 +505,17 @@
     }
     .footer-top:hover { color: var(--accent); }
 
+    /* LANG TOGGLE */
+    .lang-toggle {
+      font-size: 0.7rem; letter-spacing: 0.14em;
+      color: var(--text-secondary); background: none;
+      border: 1px solid var(--border-strong);
+      padding: 5px 13px; border-radius: 2px;
+      cursor: none; font-family: var(--font-body);
+      transition: color 0.3s ease, border-color 0.3s ease;
+    }
+    .lang-toggle:hover { color: var(--accent); border-color: var(--accent); }
+
     /* KEYFRAMES */
     @keyframes fadeUp {
       from { opacity: 0; transform: translateY(18px); }
@@ -551,20 +562,21 @@
 
   <!-- NAV -->
   <nav id="nav">
-    <a href="#hero" class="nav-logo" style="text-decoration:none;cursor:none;">BL</a>
+    <a href="#hero" class="nav-logo" style="text-decoration:none;cursor:none;">BLC</a>
     <ul class="nav-links">
-      <li><a href="#sobre">Sobre</a></li>
-      <li><a href="#cases">Cases</a></li>
-      <li><a href="#skills">Skills</a></li>
-      <li><a href="#depoimentos">Depoimentos</a></li>
-      <li><a href="#contato" class="nav-cta">Contato</a></li>
+      <li><a href="#sobre" data-i18n="nav-sobre">Sobre</a></li>
+      <li><a href="#cases" data-i18n="nav-cases">Cases</a></li>
+      <li><a href="#skills" data-i18n="nav-skills">Skills</a></li>
+      <li><a href="#depoimentos" data-i18n="nav-dep">Depoimentos</a></li>
+      <li><a href="#contato" class="nav-cta" data-i18n="nav-contact">Contato</a></li>
     </ul>
+    <button class="lang-toggle" id="langToggle" onclick="toggleLang()">EN</button>
   </nav>
 
   <!-- HERO -->
   <section id="hero">
     <div class="hero-rule"></div>
-    <p class="hero-eyebrow">Portfólio — 2025</p>
+    <p class="hero-eyebrow" data-i18n="hero-eyebrow">Portfólio — 2025</p>
     <h1 class="hero-name">
       <span class="hero-name-line" id="hl1">
         <span>B</span><span>R</span><span>U</span><span>N</span><span>A</span>
@@ -578,9 +590,9 @@
       <p class="hero-role">Discovery · Delivery · Growth · SaaS & B2B/B2C</p>
     </div>
     <div class="hero-bottom">
-      <p class="hero-tagline">Product Manager com +7 anos em produtos digitais end-to-end. OKRs · KPIs · Data-driven · Experimentação.</p>
+      <p class="hero-tagline" data-i18n="hero-tagline">Product Manager com +7 anos em produtos digitais end-to-end. OKRs · KPIs · Data-driven · Experimentação.</p>
       <a href="#cases" class="hero-cta">
-        <span>Ver Cases</span>
+        <span data-i18n="hero-cta">Ver Cases</span>
         <span class="hero-cta-line"></span>
         <span>→</span>
       </a>
@@ -594,35 +606,35 @@
 
   <!-- SOBRE -->
   <section id="sobre">
-    <div class="section-label reveal">Sobre Mim</div>
-    <h2 class="section-title reveal">Produto, dados<br>e <em>crescimento</em></h2>
+    <div class="section-label reveal" data-i18n="sobre-label">Sobre Mim</div>
+    <h2 class="section-title reveal" data-i18n="sobre-title" data-i18n-html>Produto, dados<br>e <em>crescimento</em></h2>
     <div class="about-grid">
       <div class="about-photo reveal">
         <img src="foto.JPG" alt="Bruna La Croix" class="about-img">
         <p class="about-photo-caption">Bruna La Croix</p>
       </div>
       <div class="about-text reveal d1">
-        <p>Tenho mais de <strong>7 anos de experiência</strong> em produtos digitais end-to-end, em startups SaaS B2B e B2C. Gerenciei backlog, roadmap e priorização de entregas de alto valor, colaborando com squads multifuncionais para alinhar negócio e tecnologia aos objetivos estratégicos.</p>
-        <p>Iniciei carreira no <strong>Twitter</strong> gerenciando performance de mídia paga para o Governo. Na <strong>Ribon</strong> (founding team e primeira funcionária), liderei growth em aquisição, ativação, retenção e conversão — escalando a base de usuários de <strong>4 mil para +100 mil ativos</strong> e elevando a conversão de doadores pagos de <strong>0,03% para 1%</strong>.</p>
-        <p>Graduada em Administração pela <strong>UnB</strong> e com formação em Product Manager pela <strong>PM3</strong>. Fluente em inglês, perfil orientado a resultados e foco em experiência do usuário.</p>
+        <p data-i18n="sobre-p1" data-i18n-html>Tenho mais de <strong>7 anos de experiência</strong> em produtos digitais end-to-end, em startups SaaS B2B e B2C. Gerenciei backlog, roadmap e priorização de entregas de alto valor, colaborando com squads multifuncionais para alinhar negócio e tecnologia aos objetivos estratégicos.</p>
+        <p data-i18n="sobre-p2" data-i18n-html>Iniciei carreira no <strong>Twitter</strong> gerenciando performance de mídia paga para o Governo. Na <strong>Ribon</strong> (founding team e primeira funcionária), liderei growth em aquisição, ativação, retenção e conversão — escalando a base de usuários de <strong>4 mil para +100 mil ativos</strong> e elevando a conversão de doadores pagos de <strong>0,03% para 1%</strong>.</p>
+        <p data-i18n="sobre-p3" data-i18n-html>Graduada em Administração pela <strong>UnB</strong> e com formação em Product Manager pela <strong>PM3</strong>. Fluente em inglês, perfil orientado a resultados e foco em experiência do usuário.</p>
         <div class="about-sig">Bruna La Croix</div>
       </div>
       <div class="about-stats reveal d2">
         <div class="stat">
           <div class="stat-n">7<sup>+</sup></div>
-          <div class="stat-l">Anos de Experiência</div>
+          <div class="stat-l" data-i18n="stat-1">Anos de Experiência</div>
         </div>
         <div class="stat">
           <div class="stat-n">100K<sup>+</sup></div>
-          <div class="stat-l">Usuários Ativos</div>
+          <div class="stat-l" data-i18n="stat-2">Usuários Ativos</div>
         </div>
         <div class="stat">
           <div class="stat-n">33<sup>×</sup></div>
-          <div class="stat-l">Crescimento de Conversão</div>
+          <div class="stat-l" data-i18n="stat-3">Crescimento de Conversão</div>
         </div>
         <div class="stat">
           <div class="stat-n">3</div>
-          <div class="stat-l">Cases Documentados</div>
+          <div class="stat-l" data-i18n="stat-4">Cases Documentados</div>
         </div>
       </div>
     </div>
@@ -630,8 +642,8 @@
 
   <!-- CASES -->
   <section id="cases">
-    <div class="section-label reveal">Cases</div>
-    <h2 class="section-title reveal">Cases<br><em>selecionados</em></h2>
+    <div class="section-label reveal" data-i18n="cases-label">Cases</div>
+    <h2 class="section-title reveal" data-i18n="cases-title" data-i18n-html>Cases<br><em>selecionados</em></h2>
     <div class="cases-grid" style="grid-template-columns:1fr 1fr;">
 
       <div class="case-card c1 reveal">
@@ -639,12 +651,12 @@
         <div class="case-inner">
           <div class="case-top">
             <span class="case-num">01</span>
-            <span class="case-tag">Conversão & Growth</span>
+            <span class="case-tag" data-i18n="case-1-tag">Conversão & Growth</span>
           </div>
           <div>
-            <h3 class="case-title">De 0,03% para 1%<br>de conversão</h3>
-            <p class="case-desc">Implementei cultura de experimentação com testes A/B end-to-end na Ribon, elevando a conversão de doadores pagos em mais de 33×.</p>
-            <a href="#" class="case-link">Ver Case <span class="case-link-line"></span> →</a>
+            <h3 class="case-title" data-i18n="case-1-title" data-i18n-html>De 0,03% para 1%<br>de conversão</h3>
+            <p class="case-desc" data-i18n="case-1-desc">Implementei cultura de experimentação com testes A/B end-to-end na Ribon, elevando a conversão de doadores pagos em mais de 33×.</p>
+            <a href="#" class="case-link"><span data-i18n="case-link">Ver Case</span> <span class="case-link-line"></span> →</a>
           </div>
         </div>
       </div>
@@ -654,12 +666,12 @@
         <div class="case-inner">
           <div class="case-top">
             <span class="case-num">02</span>
-            <span class="case-tag">Aquisição de Usuários</span>
+            <span class="case-tag" data-i18n="case-2-tag">Aquisição de Usuários</span>
           </div>
           <div>
-            <h3 class="case-title">Dobrando a aquisição<br>de usuários</h3>
-            <p class="case-desc">Estratégia de growth que escalou a base de usuários ativos da Ribon de 4 mil para mais de 100 mil, com foco em aquisição e retenção.</p>
-            <a href="#" class="case-link">Ver Case <span class="case-link-line"></span> →</a>
+            <h3 class="case-title" data-i18n="case-2-title" data-i18n-html>Dobrando a aquisição<br>de usuários</h3>
+            <p class="case-desc" data-i18n="case-2-desc">Estratégia de growth que escalou a base de usuários ativos da Ribon de 4 mil para mais de 100 mil, com foco em aquisição e retenção.</p>
+            <a href="#" class="case-link"><span data-i18n="case-link">Ver Case</span> <span class="case-link-line"></span> →</a>
           </div>
         </div>
       </div>
@@ -669,12 +681,12 @@
         <div class="case-inner">
           <div class="case-top">
             <span class="case-num">03</span>
-            <span class="case-tag">Estratégia de Produto</span>
+            <span class="case-tag" data-i18n="case-3-tag">Estratégia de Produto</span>
           </div>
           <div>
-            <h3 class="case-title">De B2C para B2B</h3>
-            <p class="case-desc">Liderança da transição estratégica de modelo de negócio, conduzindo discovery, roadmap e delivery para expansão ao mercado corporativo mantendo a operação B2C ativa.</p>
-            <a href="#" class="case-link">Ver Case <span class="case-link-line"></span> →</a>
+            <h3 class="case-title" data-i18n="case-3-title">De B2C para B2B</h3>
+            <p class="case-desc" data-i18n="case-3-desc">Liderança da transição estratégica de modelo de negócio, conduzindo discovery, roadmap e delivery para expansão ao mercado corporativo mantendo a operação B2C ativa.</p>
+            <a href="#" class="case-link"><span data-i18n="case-link">Ver Case</span> <span class="case-link-line"></span> →</a>
           </div>
         </div>
       </div>
@@ -684,16 +696,16 @@
 
   <!-- SKILLS -->
   <section id="skills">
-    <div class="section-label reveal">Habilidades</div>
-    <h2 class="section-title reveal">Competências &<br><em>ferramentas</em></h2>
+    <div class="section-label reveal" data-i18n="skills-label">Habilidades</div>
+    <h2 class="section-title reveal" data-i18n="skills-title" data-i18n-html>Competências &<br><em>ferramentas</em></h2>
     <div class="skills-layout">
       <div class="skills-intro reveal">
-        <p>Combino visão estratégica de produto com cultura de experimentação e orientação a dados para entregar crescimento sustentável e experiências que geram impacto real.</p>
+        <p data-i18n="skills-intro">Combino visão estratégica de produto com cultura de experimentação e orientação a dados para entregar crescimento sustentável e experiências que geram impacto real.</p>
         <br>
         <div class="lang-list">
-          <div class="lang-item"><span class="lang-name">Português</span><span class="lang-level">Nativo</span></div>
-          <div class="lang-item"><span class="lang-name">Inglês</span><span class="lang-level">Fluente</span></div>
-          <div class="lang-item"><span class="lang-name">Espanhol</span><span class="lang-level">Intermediário</span></div>
+          <div class="lang-item"><span class="lang-name" data-i18n="lang-pt">Português</span><span class="lang-level" data-i18n="level-native">Nativo</span></div>
+          <div class="lang-item"><span class="lang-name" data-i18n="lang-en">Inglês</span><span class="lang-level" data-i18n="level-fluent">Fluente</span></div>
+          <div class="lang-item"><span class="lang-name" data-i18n="lang-es">Espanhol</span><span class="lang-level" data-i18n="level-inter">Intermediário</span></div>
         </div>
       </div>
       <div>
@@ -728,8 +740,8 @@
 
   <!-- DEPOIMENTOS -->
   <section id="depoimentos">
-    <div class="section-label reveal">Depoimentos</div>
-    <h2 class="section-title reveal">O que colegas<br>e líderes <em>dizem</em></h2>
+    <div class="section-label reveal" data-i18n="dep-label">Depoimentos</div>
+    <h2 class="section-title reveal" data-i18n="dep-title" data-i18n-html>O que colegas<br>e líderes <em>dizem</em></h2>
     <div class="test-grid" style="grid-template-columns:1fr 1fr;">
       <div class="test-card reveal">
         <span class="test-quote-mark">"</span>
@@ -738,7 +750,7 @@
           <div class="test-avatar">RR</div>
           <div>
             <div class="test-name">Rafael Rodeiro</div>
-            <div class="test-role">Ribon</div>
+            <div class="test-role" data-i18n="dep-role-1">Ribon</div>
           </div>
         </div>
       </div>
@@ -749,7 +761,7 @@
           <div class="test-avatar">CJ</div>
           <div>
             <div class="test-name">Carlos Junior</div>
-            <div class="test-role">Colega de Equipe</div>
+            <div class="test-role" data-i18n="dep-role-2">Colega de Equipe</div>
           </div>
         </div>
       </div>
@@ -760,7 +772,7 @@
           <div class="test-avatar">LB</div>
           <div>
             <div class="test-name">Luísa Brito</div>
-            <div class="test-role">Colega na Ribon</div>
+            <div class="test-role" data-i18n="dep-role-3">Colega na Ribon</div>
           </div>
         </div>
       </div>
@@ -771,7 +783,7 @@
           <div class="test-avatar">MH</div>
           <div>
             <div class="test-name">Murilo Hiratomi</div>
-            <div class="test-role">Colega de Equipe</div>
+            <div class="test-role" data-i18n="dep-role-4">Colega de Equipe</div>
           </div>
         </div>
       </div>
@@ -781,26 +793,16 @@
   <!-- CONTATO -->
   <section id="contato">
     <div class="contact-inner">
-      <h2 class="contact-title reveal">Vamos criar<br><em>juntos?</em></h2>
+      <h2 class="contact-title reveal" data-i18n="contact-title" data-i18n-html>Vamos criar<br><em>juntos?</em></h2>
       <div class="contact-links reveal d1">
-        <a href="mailto:bruna@brunalacroix.com" class="contact-link">
+        <a href="mailto:brulacroix@gmail.com" class="contact-link">
           <span class="cl-icon">@</span>
-          <span>bruna@brunalacroix.com</span>
+          <span>brulacroix@gmail.com</span>
         </a>
         <div class="cl-sep"></div>
-        <a href="#" class="contact-link">
+        <a href="https://www.linkedin.com/in/bruna-la-croix/" target="_blank" class="contact-link">
           <span class="cl-icon">in</span>
           <span>LinkedIn</span>
-        </a>
-        <div class="cl-sep"></div>
-        <a href="#" class="contact-link">
-          <span class="cl-icon">ig</span>
-          <span>Instagram</span>
-        </a>
-        <div class="cl-sep"></div>
-        <a href="#" class="contact-link">
-          <span class="cl-icon">be</span>
-          <span>Behance</span>
         </a>
       </div>
     </div>
@@ -809,8 +811,8 @@
   <!-- FOOTER -->
   <footer>
     <span class="footer-logo">Bruna La Croix</span>
-    <span class="footer-copy">© 2025 — Todos os direitos reservados</span>
-    <a href="#hero" class="footer-top">↑ Topo</a>
+    <span class="footer-copy" data-i18n="footer-copy">© 2025 — Todos os direitos reservados</span>
+    <a href="#hero" class="footer-top" data-i18n="footer-top">↑ Topo</a>
   </footer>
 
   <script>
@@ -869,6 +871,104 @@
         if (t) { e.preventDefault(); t.scrollIntoView({ behavior: 'smooth' }); }
       });
     });
+
+    // ── i18n ──────────────────────────────────────────
+    const i18n = {
+      pt: {
+        'nav-sobre':'Sobre','nav-cases':'Cases','nav-skills':'Skills',
+        'nav-dep':'Depoimentos','nav-contact':'Contato',
+        'hero-eyebrow':'Portfólio — 2025',
+        'hero-tagline':'Product Manager com +7 anos em produtos digitais end-to-end. OKRs · KPIs · Data-driven · Experimentação.',
+        'hero-cta':'Ver Cases',
+        'sobre-label':'Sobre Mim',
+        'sobre-title':'Produto, dados<br>e <em>crescimento</em>',
+        'sobre-p1':'Tenho mais de <strong>7 anos de experiência</strong> em produtos digitais end-to-end, em startups SaaS B2B e B2C. Gerenciei backlog, roadmap e priorização de entregas de alto valor, colaborando com squads multifuncionais para alinhar negócio e tecnologia aos objetivos estratégicos.',
+        'sobre-p2':'Iniciei carreira no <strong>Twitter</strong> gerenciando performance de mídia paga para o Governo. Na <strong>Ribon</strong> (founding team e primeira funcionária), liderei growth em aquisição, ativação, retenção e conversão — escalando a base de usuários de <strong>4 mil para +100 mil ativos</strong> e elevando a conversão de doadores pagos de <strong>0,03% para 1%</strong>.',
+        'sobre-p3':'Graduada em Administração pela <strong>UnB</strong> e com formação em Product Manager pela <strong>PM3</strong>. Fluente em inglês, perfil orientado a resultados e foco em experiência do usuário.',
+        'stat-1':'Anos de Experiência','stat-2':'Usuários Ativos',
+        'stat-3':'Crescimento de Conversão','stat-4':'Cases Documentados',
+        'cases-label':'Cases',
+        'cases-title':'Cases<br><em>selecionados</em>',
+        'case-1-tag':'Conversão & Growth',
+        'case-1-title':'De 0,03% para 1%<br>de conversão',
+        'case-1-desc':'Implementei cultura de experimentação com testes A/B end-to-end na Ribon, elevando a conversão de doadores pagos em mais de 33×.',
+        'case-2-tag':'Aquisição de Usuários',
+        'case-2-title':'Dobrando a aquisição<br>de usuários',
+        'case-2-desc':'Estratégia de growth que escalou a base de usuários ativos da Ribon de 4 mil para mais de 100 mil, com foco em aquisição e retenção.',
+        'case-3-tag':'Estratégia de Produto','case-3-title':'De B2C para B2B',
+        'case-3-desc':'Liderança da transição estratégica de modelo de negócio, conduzindo discovery, roadmap e delivery para expansão ao mercado corporativo mantendo a operação B2C ativa.',
+        'case-link':'Ver Case',
+        'skills-label':'Habilidades',
+        'skills-title':'Competências &<br><em>ferramentas</em>',
+        'skills-intro':'Combino visão estratégica de produto com cultura de experimentação e orientação a dados para entregar crescimento sustentável e experiências que geram impacto real.',
+        'lang-pt':'Português','lang-en':'Inglês','lang-es':'Espanhol',
+        'level-native':'Nativo','level-fluent':'Fluente','level-inter':'Intermediário',
+        'dep-label':'Depoimentos',
+        'dep-title':'O que colegas<br>e líderes <em>dizem</em>',
+        'dep-role-1':'Ribon','dep-role-2':'Colega de Equipe',
+        'dep-role-3':'Colega na Ribon','dep-role-4':'Colega de Equipe',
+        'contact-title':'Vamos criar<br><em>juntos?</em>',
+        'footer-copy':'© 2025 — Todos os direitos reservados','footer-top':'↑ Topo',
+      },
+      en: {
+        'nav-sobre':'About','nav-cases':'Cases','nav-skills':'Skills',
+        'nav-dep':'Testimonials','nav-contact':'Contact',
+        'hero-eyebrow':'Portfolio — 2025',
+        'hero-tagline':'Product Manager with 7+ years in end-to-end digital products. OKRs · KPIs · Data-driven · Experimentation.',
+        'hero-cta':'View Cases',
+        'sobre-label':'About Me',
+        'sobre-title':'Product, data<br>and <em>growth</em>',
+        'sobre-p1':'I have more than <strong>7 years of experience</strong> in end-to-end digital products, in SaaS B2B and B2C startups. I managed backlog, roadmap and prioritization of high-value deliveries, collaborating with cross-functional squads to align business and technology to strategic objectives.',
+        'sobre-p2':'I started my career at <strong>Twitter</strong> managing paid media performance for the Government. At <strong>Ribon</strong> (founding team and first employee), I led growth in acquisition, activation, retention and conversion — scaling the user base from <strong>4 thousand to +100 thousand active users</strong> and raising the conversion of paying donors from <strong>0.03% to 1%</strong>.',
+        'sobre-p3':'Graduated in Business Administration from <strong>UnB</strong> and trained as a Product Manager at <strong>PM3</strong>. Fluent in English, results-oriented with a focus on user experience.',
+        'stat-1':'Years of Experience','stat-2':'Active Users',
+        'stat-3':'Conversion Growth','stat-4':'Documented Cases',
+        'cases-label':'Cases',
+        'cases-title':'Selected<br><em>case studies</em>',
+        'case-1-tag':'Conversion & Growth',
+        'case-1-title':'From 0.03% to 1%<br>conversion rate',
+        'case-1-desc':'Implemented an experimentation culture with end-to-end A/B testing at Ribon, raising the conversion of paying donors by more than 33×.',
+        'case-2-tag':'User Acquisition',
+        'case-2-title':'Doubling our<br>user acquisition',
+        'case-2-desc':'Growth strategy that scaled Ribon\'s active user base from 4 thousand to over 100 thousand, focused on acquisition and retention.',
+        'case-3-tag':'Product Strategy','case-3-title':'From B2C to B2B',
+        'case-3-desc':'Led the strategic business model transition, conducting discovery, roadmap and delivery for corporate market expansion while keeping the B2C operation active.',
+        'case-link':'View Case',
+        'skills-label':'Skills',
+        'skills-title':'Skills &<br><em>tools</em>',
+        'skills-intro':'I combine strategic product vision with an experimentation culture and data orientation to deliver sustainable growth and experiences that create real impact.',
+        'lang-pt':'Portuguese','lang-en':'English','lang-es':'Spanish',
+        'level-native':'Native','level-fluent':'Fluent','level-inter':'Intermediate',
+        'dep-label':'Testimonials',
+        'dep-title':'What colleagues<br>and leaders <em>say</em>',
+        'dep-role-1':'Ribon','dep-role-2':'Team Member',
+        'dep-role-3':'Colleague at Ribon','dep-role-4':'Team Member',
+        'contact-title':'Let\'s work<br><em>together?</em>',
+        'footer-copy':'© 2025 — All rights reserved','footer-top':'↑ Top',
+      }
+    };
+
+    let currentLang = 'pt';
+
+    function applyLang(lang) {
+      const t = i18n[lang];
+      document.querySelectorAll('[data-i18n]').forEach(el => {
+        const key = el.dataset.i18n;
+        if (!t[key]) return;
+        if (el.dataset.i18nHtml !== undefined) {
+          el.innerHTML = t[key];
+        } else {
+          el.textContent = t[key];
+        }
+      });
+      document.documentElement.lang = lang === 'en' ? 'en' : 'pt-BR';
+    }
+
+    function toggleLang() {
+      currentLang = currentLang === 'pt' ? 'en' : 'pt';
+      document.getElementById('langToggle').textContent = currentLang === 'pt' ? 'EN' : 'PT';
+      applyLang(currentLang);
+    }
   </script>
 </body>
 </html>
