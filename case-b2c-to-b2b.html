@@ -1,0 +1,689 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Case: From B2C to B2B — Bruna La Croix</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --bg: #08080A;
+    --bg2: #0f0f12;
+    --bg3: #141418;
+    --text: #EDE8DD;
+    --muted: #9A9488;
+    --accent: #C19A4D;
+    --positive: #4CAF88;
+    --border: rgba(237,232,221,0.08);
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Outfit', sans-serif;
+    font-weight: 300;
+    line-height: 1.7;
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 9999;
+    opacity: 0.025;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)' opacity='1'/%3E%3C/svg%3E");
+  }
+
+  .cursor-dot {
+    width: 6px; height: 6px; background: var(--accent); border-radius: 50%;
+    position: fixed; pointer-events: none; z-index: 10000; transform: translate(-50%,-50%);
+  }
+  .cursor-ring {
+    width: 32px; height: 32px; border: 1px solid rgba(193,154,77,0.4); border-radius: 50%;
+    position: fixed; pointer-events: none; z-index: 10000; transform: translate(-50%,-50%);
+    transition: transform 0.15s ease, width 0.2s, height 0.2s;
+  }
+
+  /* NAV */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 28px 60px;
+    background: linear-gradient(to bottom, rgba(8,8,10,0.95) 0%, transparent 100%);
+  }
+  .nav-logo {
+    font-family: 'Cormorant Garamond', serif; font-size: 22px; font-weight: 500;
+    letter-spacing: 0.08em; color: var(--text); text-decoration: none;
+  }
+  .nav-back {
+    display: flex; align-items: center; gap: 10px; font-size: 13px;
+    letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted);
+    text-decoration: none; transition: color 0.2s;
+  }
+  .nav-back:hover { color: var(--accent); }
+  .nav-back svg { width: 16px; height: 16px; }
+
+  /* HERO */
+  .hero {
+    min-height: 62vh; display: flex; flex-direction: column;
+    justify-content: flex-end; padding: 0 60px 64px; position: relative; overflow: hidden;
+  }
+  .hero-bg {
+    position: absolute; inset: 0;
+    background: radial-gradient(ellipse 80% 60% at 70% 30%, rgba(74,139,107,0.08) 0%, transparent 60%),
+                radial-gradient(ellipse 40% 40% at 20% 80%, rgba(139,122,74,0.06) 0%, transparent 50%);
+  }
+  .hero-tag {
+    font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--accent);
+    margin-bottom: 24px; opacity: 0; animation: fadeUp 0.8s ease 0.2s forwards;
+  }
+  .hero h1 {
+    font-family: 'Cormorant Garamond', serif; font-size: clamp(48px, 7vw, 100px);
+    font-weight: 300; line-height: 1; letter-spacing: -0.02em; max-width: 900px;
+    opacity: 0; animation: fadeUp 1s ease 0.4s forwards;
+  }
+  .hero h1 em { font-style: italic; color: var(--accent); }
+  .hero-meta {
+    display: flex; gap: 48px; margin-top: 48px;
+    opacity: 0; animation: fadeUp 0.8s ease 0.7s forwards;
+  }
+  .hero-meta-item { display: flex; flex-direction: column; gap: 6px; }
+  .hero-meta-label { font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--muted); }
+  .hero-meta-value { font-size: 14px; color: var(--text); }
+
+  /* HERO IMAGE */
+  .hero-image {
+    width: 100%; max-width: 1100px; margin: 0 auto; padding: 0 60px;
+    opacity: 0; animation: fadeUp 1s ease 0.9s forwards;
+  }
+  .hero-image img { width: 100%; display: block; border: 1px solid var(--border); }
+
+  /* CONTENT */
+  .content { max-width: 960px; margin: 0 auto; padding: 0 60px 120px; }
+
+  /* SECTIONS */
+  .section {
+    padding: 80px 0; border-top: 1px solid var(--border);
+    opacity: 0; transform: translateY(30px);
+    transition: opacity 0.7s ease, transform 0.7s ease;
+  }
+  .section.visible { opacity: 1; transform: none; }
+
+  .section-label {
+    font-size: 10px; letter-spacing: 0.25em; text-transform: uppercase;
+    color: var(--accent); margin-bottom: 32px; display: flex; align-items: center; gap: 16px;
+  }
+  .section-label::after { content: ''; flex: 1; height: 1px; background: var(--border); }
+
+  .section h2 {
+    font-family: 'Cormorant Garamond', serif; font-size: clamp(32px, 4vw, 52px);
+    font-weight: 400; line-height: 1.1; margin-bottom: 32px;
+  }
+
+  p {
+    font-size: 16px; line-height: 1.85; color: rgba(237,232,221,0.8); margin-bottom: 20px;
+  }
+  p:last-child { margin-bottom: 0; }
+
+  /* INFO GRID */
+  .info-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 48px; margin-bottom: 40px; }
+  .info-block h3 {
+    font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase;
+    color: var(--accent); margin-bottom: 12px;
+  }
+  .info-block p { margin-bottom: 12px; }
+
+  /* TAGS */
+  .tags { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 16px; }
+  .tag {
+    font-size: 12px; letter-spacing: 0.08em; padding: 6px 14px;
+    border: 1px solid var(--border); color: var(--muted);
+  }
+
+  /* ROLE LIST */
+  .role-list { list-style: none; display: flex; flex-direction: column; gap: 14px; }
+  .role-list li {
+    display: flex; gap: 20px; align-items: flex-start; font-size: 15px; line-height: 1.6;
+    color: rgba(237,232,221,0.8); padding: 18px 24px; background: var(--bg3);
+    border: 1px solid var(--border); border-left: 3px solid var(--accent);
+  }
+  .role-list li .num {
+    font-family: 'Cormorant Garamond', serif; font-size: 22px;
+    color: var(--accent); opacity: 0.5; min-width: 28px;
+  }
+
+  /* FULL IMAGE */
+  .full-img { width: 100%; display: block; margin: 40px 0; border: 1px solid var(--border); }
+
+  /* SPRINT HEADER */
+  .sprint-header {
+    display: flex; align-items: flex-start; gap: 32px; margin-bottom: 32px;
+  }
+  .sprint-num {
+    font-family: 'Cormorant Garamond', serif; font-size: 72px; font-weight: 300;
+    color: var(--accent); opacity: 0.2; line-height: 1; flex-shrink: 0;
+  }
+  .sprint-header-text h2 { margin-bottom: 12px; }
+
+  /* PROCESS STEPS */
+  .process-steps { display: flex; flex-direction: column; gap: 12px; margin: 32px 0; }
+  .process-step {
+    display: flex; gap: 20px; align-items: flex-start; padding: 20px 24px;
+    background: var(--bg3); border: 1px solid var(--border);
+  }
+  .step-num {
+    font-family: 'Cormorant Garamond', serif; font-size: 28px; font-weight: 300;
+    color: var(--accent); opacity: 0.5; min-width: 32px; line-height: 1;
+  }
+  .step-text { font-size: 15px; color: rgba(237,232,221,0.8); line-height: 1.6; }
+  .step-text strong { color: var(--text); }
+
+  /* QUOTES */
+  .quotes { display: flex; flex-direction: column; gap: 12px; margin: 28px 0; }
+  .quote {
+    padding: 20px 24px 20px 32px; background: var(--bg3);
+    border: 1px solid var(--border); border-left: 3px solid var(--accent);
+    font-size: 15px; color: rgba(237,232,221,0.75); font-style: italic; line-height: 1.7;
+  }
+
+  /* DELIVERABLES */
+  .deliverables { display: flex; flex-direction: column; gap: 10px; margin: 28px 0; }
+  .deliverable-item {
+    display: flex; gap: 16px; align-items: flex-start; padding: 16px 20px;
+    background: var(--bg3); border: 1px solid var(--border); font-size: 15px;
+    color: rgba(237,232,221,0.8);
+  }
+  .deliverable-icon { color: var(--accent); font-size: 14px; min-width: 20px; line-height: 1.7; }
+
+  /* TWO-COL IMAGES */
+  .img-grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin: 32px 0; }
+  .img-grid-2 img { width: 100%; display: block; border: 1px solid var(--border); }
+
+  /* METRICS STRIP */
+  .metrics-strip {
+    display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px;
+    background: var(--border); border: 1px solid var(--border); margin: 40px 0;
+  }
+  .metric-item { background: var(--bg3); padding: 32px 28px; }
+  .metric-label {
+    font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase;
+    color: var(--muted); margin-bottom: 12px;
+  }
+  .metric-value {
+    font-family: 'Cormorant Garamond', serif; font-size: 42px; font-weight: 300;
+    color: var(--positive); line-height: 1; margin-bottom: 6px;
+  }
+  .metric-desc { font-size: 13px; color: var(--muted); }
+
+  /* JTBD GRID */
+  .jtbd-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin: 32px 0; }
+  .jtbd-card {
+    padding: 28px 28px; background: var(--bg3);
+    border: 1px solid var(--border); border-top: 3px solid var(--accent);
+  }
+  .jtbd-icon { font-size: 24px; margin-bottom: 14px; }
+  .jtbd-card h4 {
+    font-family: 'Cormorant Garamond', serif; font-size: 24px; font-weight: 400;
+    color: var(--accent); margin-bottom: 10px;
+  }
+  .jtbd-card p { font-size: 14px; margin-bottom: 0; }
+
+  /* CHANNELS */
+  .channels { display: flex; flex-direction: column; gap: 10px; margin: 28px 0; }
+  .channel-item {
+    display: flex; gap: 20px; align-items: flex-start; padding: 18px 24px;
+    background: var(--bg3); border: 1px solid var(--border);
+  }
+  .channel-item .ch-icon { font-size: 18px; min-width: 28px; }
+  .channel-item .ch-text { font-size: 15px; color: rgba(237,232,221,0.8); line-height: 1.6; }
+  .channel-item .ch-text strong { color: var(--text); }
+
+  /* RESULT BADGES */
+  .result-badges { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin: 40px 0; }
+  .result-badge {
+    background: var(--bg3); border: 1px solid var(--border);
+    border-left: 3px solid var(--positive); padding: 28px 28px;
+  }
+  .result-badge-icon { font-size: 22px; margin-bottom: 12px; }
+  .result-badge h4 {
+    font-size: 11px; letter-spacing: 0.15em; text-transform: uppercase;
+    color: var(--muted); margin-bottom: 10px;
+  }
+  .result-badge-value {
+    font-family: 'Cormorant Garamond', serif; font-size: 32px; font-weight: 300;
+    color: var(--positive); line-height: 1.1; margin-bottom: 8px;
+  }
+  .result-badge p { font-size: 13px; margin-bottom: 0; }
+
+  /* LEARNINGS */
+  .learnings-list { display: flex; flex-direction: column; gap: 16px; }
+  .learning-item {
+    display: flex; gap: 24px; align-items: flex-start; padding: 28px 32px;
+    background: var(--bg3); border: 1px solid var(--border);
+  }
+  .learning-icon { font-size: 22px; min-width: 32px; }
+  .learning-item p { margin-bottom: 0; font-size: 15px; }
+
+  /* OUTCOME */
+  .outcome-box {
+    padding: 48px; background: linear-gradient(135deg, var(--bg3) 0%, rgba(74,139,107,0.06) 100%);
+    border: 1px solid var(--border); margin-top: 40px;
+  }
+  .outcome-box p { font-size: 17px; line-height: 1.9; margin-bottom: 0; }
+
+  /* BACK */
+  .back-cta { text-align: center; padding: 72px 0 0; border-top: 1px solid var(--border); }
+  .back-cta p {
+    font-size: 13px; letter-spacing: 0.15em; text-transform: uppercase;
+    color: var(--muted); margin-bottom: 24px;
+  }
+  .back-btn {
+    display: inline-flex; align-items: center; gap: 14px; font-size: 13px;
+    letter-spacing: 0.15em; text-transform: uppercase; color: var(--accent);
+    text-decoration: none; padding: 16px 32px; border: 1px solid rgba(193,154,77,0.3);
+    transition: all 0.2s;
+  }
+  .back-btn:hover { background: rgba(193,154,77,0.06); gap: 20px; }
+
+  /* ANIMATIONS */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(24px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  /* RESPONSIVE */
+  @media (max-width: 768px) {
+    nav { padding: 20px 24px; }
+    .hero { padding: 0 24px 48px; }
+    .hero-meta { flex-wrap: wrap; gap: 24px; }
+    .hero-image { padding: 0 24px; }
+    .content { padding: 0 24px 80px; }
+    .info-grid { grid-template-columns: 1fr; gap: 32px; }
+    .img-grid-2 { grid-template-columns: 1fr; }
+    .metrics-strip { grid-template-columns: 1fr; }
+    .jtbd-grid { grid-template-columns: 1fr; }
+    .result-badges { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<div class="cursor-dot" id="dot"></div>
+<div class="cursor-ring" id="ring"></div>
+
+<nav>
+  <a href="index.html" class="nav-logo">BL</a>
+  <a href="index.html" class="nav-back">
+    <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5">
+      <path d="M10 3L5 8l5 5"/>
+    </svg>
+    Back to Portfolio
+  </a>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-tag">Product Strategy &nbsp;·&nbsp; Ribon &nbsp;·&nbsp; Jan/24 – Oct/24</div>
+  <h1>From <em>B2C</em><br>to B2B</h1>
+  <div class="hero-meta">
+    <div class="hero-meta-item">
+      <span class="hero-meta-label">Period</span>
+      <span class="hero-meta-value">10 months</span>
+    </div>
+    <div class="hero-meta-item">
+      <span class="hero-meta-label">Company</span>
+      <span class="hero-meta-value">Ribon</span>
+    </div>
+    <div class="hero-meta-item">
+      <span class="hero-meta-label">Skills</span>
+      <span class="hero-meta-value">Design Sprint · Discovery · Interviews · Go-to-Market</span>
+    </div>
+  </div>
+</section>
+
+<!-- HERO IMAGE -->
+<div class="hero-image">
+  <img src="img-b2c/1.png" alt="From B2C to B2B — Case Overview">
+</div>
+
+<div class="content">
+
+  <!-- CONTEXT -->
+  <section class="section">
+    <div class="section-label">Context</div>
+    <div class="info-grid">
+      <div class="info-block">
+        <h3>About Ribon</h3>
+        <p>Ribon is a social impact startup that facilitates donations to nonprofits through an innovative and accessible model. Users donate to social causes at no cost, using "tickets" — a virtual currency earned by engaging with content.</p>
+        <p>These tickets are sponsored by philanthropists and companies committed to expanding collective social impact. Ribon generates revenue when users choose to donate with their own funds after experiencing donations with the virtual currency.</p>
+      </div>
+      <div class="info-block">
+        <h3>Strategic Shift</h3>
+        <p>While working on conversion and acquisition in the app, we identified two signals that would shape an entire strategic pivot:</p>
+        <p><strong style="color:var(--text)">Users valued the tickets more than the donations themselves.</strong> Emotional connection — not the cause alone — was the key driver of engagement and conversion.</p>
+        <p>This led us to organize our first Design Sprint, aiming to strengthen the experience and reimagine Ribon as a well-being platform.</p>
+        <div class="tags">
+          <span class="tag">Design Sprint</span>
+          <span class="tag">Discovery</span>
+          <span class="tag">JTBD</span>
+          <span class="tag">Go-to-Market</span>
+          <span class="tag">B2B Strategy</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- MY ROLE -->
+  <section class="section">
+    <div class="section-label">My Role</div>
+    <h2>Leading the transition,<br>end to end</h2>
+    <ul class="role-list">
+      <li>
+        <span class="num">01</span>
+        <span>Facilitated two Design Sprints — structured discovery processes to align the team around key insights and prototype solutions rapidly.</span>
+      </li>
+      <li>
+        <span class="num">02</span>
+        <span>Led user research and qualitative interviews using the Jobs to Be Done framework, identifying the emotional and social motivations driving engagement.</span>
+      </li>
+      <li>
+        <span class="num">03</span>
+        <span>Drove product roadmap and delivery for the B2B MVP, coordinating cross-functional squads while keeping the B2C operation active and stable.</span>
+      </li>
+      <li>
+        <span class="num">04</span>
+        <span>Repositioned Ribon's go-to-market strategy — from broad B2C acquisition to a structured B2B motion targeting enterprise clients in Brazil and the U.S.</span>
+      </li>
+      <li>
+        <span class="num">05</span>
+        <span>Revamped website and sales materials to align with enterprise sales cycles and reflect the new positioning around employee well-being.</span>
+      </li>
+    </ul>
+  </section>
+
+  <!-- DESIGN SPRINT 1 -->
+  <section class="section">
+    <div class="section-label">Design Sprint 01</div>
+    <div class="sprint-header">
+      <div class="sprint-num">01</div>
+      <div class="sprint-header-text">
+        <h2>Emotion &amp; Connection<br>tied to a subscription model</h2>
+        <p>In the first semester, we identified two core tensions in user behavior that pointed to a bigger opportunity. The challenge was clear: increase the perceived value of tickets and highlight the well-being associated with donating.</p>
+      </div>
+    </div>
+
+    <img src="img-b2c/2.png" alt="Design Sprint 1 — Research and User Insights" class="full-img">
+
+    <div class="quotes">
+      <div class="quote">"I am a consumer. I wanted to collect the tickets, like a little game in my head, collecting tickets."</div>
+      <div class="quote">"(Earning tickets) feels like a treasure hunt, collecting Pokémons."</div>
+      <div class="quote">"I lived in Japan, so I donate a lot to natural disasters. When I see something abroad I want to do something."</div>
+      <div class="quote">"I adopted 4 stray dogs, so I always liked to help animal protection nonprofits."</div>
+    </div>
+
+    <p>The sprint revealed a clear duality: gamification drove habitual behavior, while personal identification with causes drove emotional depth. The prototype we built leaned into both.</p>
+
+    <h3 style="font-family:'Cormorant Garamond',serif; font-size:24px; font-weight:400; margin: 40px 0 20px; color:var(--text)">Sprint Deliverables</h3>
+    <div class="deliverables">
+      <div class="deliverable-item">
+        <span class="deliverable-icon">→</span>
+        <span><strong style="color:var(--text)">Longer donation flows</strong> — encouraging deeper connection with nonprofits and their causes.</span>
+      </div>
+      <div class="deliverable-item">
+        <span class="deliverable-icon">→</span>
+        <span><strong style="color:var(--text)">Gamification with collectible cards</strong> — visual artifacts about nonprofits and well-being to increase engagement.</span>
+      </div>
+      <div class="deliverable-item">
+        <span class="deliverable-icon">→</span>
+        <span><strong style="color:var(--text)">Ribon Club</strong> — a subscription model offering more tickets to users, monetizing the engagement loop.</span>
+      </div>
+    </div>
+
+    <div class="img-grid-2">
+      <img src="img-b2c/3.png" alt="Sprint 1 Prototype — Screens">
+      <img src="img-b2c/4.png" alt="Sprint 1 Prototype — Flows">
+    </div>
+  </section>
+
+  <!-- RESULTS H1 -->
+  <section class="section">
+    <div class="section-label">Results — First Half</div>
+    <h2>Stable conversion,<br>growing engagement</h2>
+    <p>The Design Sprint expanded our vision, positioning Ribon as a well-being experience beyond just a donation app. Ribon Club launched in March, and we saw positive momentum across key metrics in the first half of the year.</p>
+
+    <img src="img-b2c/5.png" alt="Results — First Half Metrics" class="full-img">
+
+    <div class="metrics-strip">
+      <div class="metric-item">
+        <div class="metric-label">Conversion Rate</div>
+        <div class="metric-value">1%</div>
+        <div class="metric-desc">Stable, with slight improvement even with acquisition growth</div>
+      </div>
+      <div class="metric-item">
+        <div class="metric-label">Weekly Ticket Usage</div>
+        <div class="metric-value">4.6→10</div>
+        <div class="metric-desc">Core engagement metric more than doubled</div>
+      </div>
+      <div class="metric-item">
+        <div class="metric-label">New Revenue Stream</div>
+        <div class="metric-value">Club</div>
+        <div class="metric-desc">Subscription model launched and validated with users</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- STRATEGY SHIFT -->
+  <section class="section">
+    <div class="section-label">Strategy Shift</div>
+    <h2>Ribon Club<br>for corporate campaigns</h2>
+    <p>In the second half of the year, an international bank approached us with a proposal: use the Ribon app for its corporate donation campaign, offering Ribon Club subscriptions to employees.</p>
+    <p>Our focus on well-being was a key differentiator. While traditional corporate social programs generate around <strong style="color:var(--text)">two donations per year</strong>, the Ribon app achieved this frequency <strong style="color:var(--accent)">weekly — 20 times more.</strong></p>
+    <p>Given the high projected revenue margin, we began adapting the app as an MVP to support the partnership, and planned a second Design Sprint to tackle this new challenge.</p>
+
+    <img src="img-b2c/6.png" alt="Strategy Shift — B2B Corporate Pivot" class="full-img">
+  </section>
+
+  <!-- DESIGN SPRINT 2 -->
+  <section class="section">
+    <div class="section-label">Design Sprint 02</div>
+    <div class="sprint-header">
+      <div class="sprint-num">02</div>
+      <div class="sprint-header-text">
+        <h2>Visibility &amp; Purpose<br>in the corporate environment</h2>
+        <p>We benchmarked against competitors like Benevity, Blackbaud, and Cauze to identify differentiation opportunities. Our main advantage: a product built around the well-being of the end user — not just corporate reporting.</p>
+      </div>
+    </div>
+
+    <p>Using the <strong style="color:var(--text)">Jobs to Be Done methodology</strong>, we interviewed employees already participating in corporate social programs. Two core jobs emerged:</p>
+
+    <div class="jtbd-grid">
+      <div class="jtbd-card">
+        <div class="jtbd-icon">👁</div>
+        <h4>Visibility</h4>
+        <p>Being recognized and admired by leaders, peers, and subordinates. Participation was often tied to career advancement and social positioning within the company.</p>
+      </div>
+      <div class="jtbd-card">
+        <div class="jtbd-icon">🎯</div>
+        <h4>Purpose</h4>
+        <p>Personal identification with a cause — donating because it genuinely resonated with individual values, life experiences, or community ties.</p>
+      </div>
+    </div>
+
+    <div class="quotes">
+      <div class="quote">"There were many people who joined just to promote themselves and didn't contribute at all."</div>
+      <div class="quote">"I didn't usually participate, but there it's necessary to get promoted. It gives a lot of visibility, and as a director, it's mandatory."</div>
+      <div class="quote">"Since I am also a person with a disability, I thought it was important to participate in the discussions and express my opinion."</div>
+    </div>
+
+    <img src="img-b2c/7.png" alt="Design Sprint 2 — Discovery and Research" class="full-img">
+
+    <h3 style="font-family:'Cormorant Garamond',serif; font-size:24px; font-weight:400; margin: 40px 0 20px; color:var(--text)">Sprint Deliverables</h3>
+    <div class="deliverables">
+      <div class="deliverable-item">
+        <span class="deliverable-icon">→</span>
+        <span><strong style="color:var(--text)">Customized corporate profile</strong> — with affinity group tags to signal purpose alignment.</span>
+      </div>
+      <div class="deliverable-item">
+        <span class="deliverable-icon">→</span>
+        <span><strong style="color:var(--text)">Donor ranking</strong> — highlighting the most engaged employees to satisfy the visibility job.</span>
+      </div>
+      <div class="deliverable-item">
+        <span class="deliverable-icon">→</span>
+        <span><strong style="color:var(--text)">Collective missions with rewards</strong> — activating employees through company-wide challenges.</span>
+      </div>
+      <div class="deliverable-item">
+        <span class="deliverable-icon">→</span>
+        <span><strong style="color:var(--text)">Ticket gifts between employees</strong> — enabling peer recognition through variable ticket rewards.</span>
+      </div>
+      <div class="deliverable-item">
+        <span class="deliverable-icon">→</span>
+        <span><strong style="color:var(--text)">Quarterly impact Wrapped</strong> — a social feature celebrating collective impact per quarter.</span>
+      </div>
+    </div>
+
+    <img src="img-b2c/8.png" alt="Design Sprint 2 — Prototype Screens" class="full-img">
+  </section>
+
+  <!-- POC -->
+  <section class="section">
+    <div class="section-label">First Business POC</div>
+    <h2>Validating at scale<br>before full commitment</h2>
+    <p>Before starting the full project with the bank or shifting our entire strategy, we tested the B2B model on a smaller scale — a lab that used Ribon in its annual social team competition.</p>
+    <p>Without the developed features, we made only flow adjustments to create an MVP. The results exceeded expectations.</p>
+
+    <img src="img-b2c/9.png" alt="POC Results — Retention and Engagement" class="full-img">
+
+    <div class="metrics-strip">
+      <div class="metric-item">
+        <div class="metric-label">Employees Engaged</div>
+        <div class="metric-value">~400</div>
+        <div class="metric-desc">Active donations during the lab campaign</div>
+      </div>
+      <div class="metric-item">
+        <div class="metric-label">Retention at Week 6</div>
+        <div class="metric-value">15→64%</div>
+        <div class="metric-desc">vs. average B2C user base retention</div>
+      </div>
+      <div class="metric-item">
+        <div class="metric-label">Engagement Level</div>
+        <div class="metric-value">4×</div>
+        <div class="metric-desc">Higher than comparable B2C cohorts</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- GO-TO-MARKET -->
+  <section class="section">
+    <div class="section-label">Go-to-Market &amp; Repositioning</div>
+    <h2>From broad to focused:<br>scaling the B2B motion</h2>
+    <p>After validating the B2B opportunity, it was clear Ribon needed a structured acquisition strategy to engage enterprise clients at scale. I led this transition — repositioning Ribon from broad B2C to a targeted B2B strategy, with a clear go-to-market motion in Brazil and groundwork for international expansion.</p>
+
+    <img src="img-b2c/10.png" alt="Go-to-Market Strategy and Results" class="full-img">
+
+    <div class="channels">
+      <div class="channel-item">
+        <span class="ch-icon">✦</span>
+        <div class="ch-text"><strong>Refined Positioning</strong> — Tailored messaging directly addressing HR and people leaders and their challenges in employee engagement and CSR.</div>
+      </div>
+      <div class="channel-item">
+        <span class="ch-icon">✦</span>
+        <div class="ch-text"><strong>Thought Leadership</strong> — Leveraging LinkedIn and industry authority to build credibility in the corporate social impact space.</div>
+      </div>
+      <div class="channel-item">
+        <span class="ch-icon">✦</span>
+        <div class="ch-text"><strong>Strategic Content</strong> — Developing high-value case studies, blog posts, and educational videos for the B2B audience.</div>
+      </div>
+      <div class="channel-item">
+        <span class="ch-icon">✦</span>
+        <div class="ch-text"><strong>Small Curated Events</strong> — Engaging key decision-makers in target industries through intimate, high-relevance formats.</div>
+      </div>
+      <div class="channel-item">
+        <span class="ch-icon">✦</span>
+        <div class="ch-text"><strong>Sales Enablement</strong> — Revamped website and sales materials to align with enterprise sales cycles and buying committees.</div>
+      </div>
+    </div>
+
+    <div class="result-badges">
+      <div class="result-badge">
+        <div class="result-badge-icon">🔥</div>
+        <h4>Blackbaud Accelerator</h4>
+        <div class="result-badge-value">Official Partner</div>
+        <p>Selected for Blackbaud's accelerator program, establishing Ribon as a credible player in the corporate social impact space.</p>
+      </div>
+      <div class="result-badge">
+        <div class="result-badge-icon">🔥</div>
+        <h4>Enterprise Pipeline — 3 months</h4>
+        <div class="result-badge-value">2 U.S. Corporations</div>
+        <p>Secured advanced negotiations with two major U.S. corporations in just three months, validating the go-to-market strategy.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- KEY LEARNINGS -->
+  <section class="section">
+    <div class="section-label">Key Learnings</div>
+    <h2>What this case<br>taught me</h2>
+    <div class="learnings-list">
+      <div class="learning-item">
+        <div class="learning-icon">💡</div>
+        <p><strong style="color:var(--text)">Emotional behavior is a strategic asset.</strong> What users valued most — the game-like ticket loop — wasn't just a UX quirk. It was the core differentiator that made Ribon 20x more frequent than traditional corporate programs. Understanding this pattern unlocked the entire B2B pivot.</p>
+      </div>
+      <div class="learning-item">
+        <div class="learning-icon">🔬</div>
+        <p><strong style="color:var(--text)">Validate before you build.</strong> The lab POC — run without the fully developed features — confirmed the B2B hypothesis with compelling retention data. It gave us the confidence to invest in the full pivot without committing the whole roadmap prematurely.</p>
+      </div>
+      <div class="learning-item">
+        <div class="learning-icon">🎯</div>
+        <p><strong style="color:var(--text)">Jobs to Be Done surfaces what surveys miss.</strong> Employees in corporate social programs weren't driven by altruism alone — visibility and career signaling were powerful motivators. Designing for both jobs, not just the "noble" one, made the product genuinely more effective.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- OUTCOME -->
+  <section class="section">
+    <div class="section-label">Outcome</div>
+    <h2>A platform<br>reimagined</h2>
+    <div class="outcome-box">
+      <p>What started as a conversion optimization project became a full strategic transformation. By staying close to user behavior, facilitating structured discovery through Design Sprints, and validating the B2B hypothesis incrementally, we repositioned Ribon from a consumer donation app into a scalable corporate well-being platform — without losing the B2C core that made it work in the first place.</p>
+    </div>
+  </section>
+
+  <!-- BACK CTA -->
+  <div class="back-cta section">
+    <p>Explore more cases</p>
+    <a href="index.html" class="back-btn">← Back to Portfolio</a>
+  </div>
+
+</div><!-- /content -->
+
+<script>
+  // Cursor
+  const dot = document.getElementById('dot');
+  const ring = document.getElementById('ring');
+  let mx = 0, my = 0, rx = 0, ry = 0;
+  document.addEventListener('mousemove', e => { mx = e.clientX; my = e.clientY; });
+  (function raf() {
+    dot.style.left = mx + 'px'; dot.style.top = my + 'px';
+    rx += (mx - rx) * 0.12; ry += (my - ry) * 0.12;
+    ring.style.left = rx + 'px'; ring.style.top = ry + 'px';
+    requestAnimationFrame(raf);
+  })();
+
+  // Scroll reveal
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+  }, { threshold: 0.08 });
+  document.querySelectorAll('.section').forEach(s => observer.observe(s));
+</script>
+</body>
+</html>
