@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Bruna Lacroix — Portfólio</title>
+  <title>Bruna La Croix — Product Manager</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
@@ -382,6 +382,24 @@
       text-transform: uppercase; color: var(--text-muted);
     }
 
+    /* TOOLS & LANGUAGES */
+    .lang-list { display: flex; flex-direction: column; gap: 10px; }
+    .lang-item { display: flex; justify-content: space-between; align-items: center; padding: 10px 0; border-bottom: 1px solid var(--border); }
+    .lang-name { font-family: var(--font-display); font-size: 1rem; color: var(--text-secondary); }
+    .lang-level { font-size: 0.65rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--accent); }
+    .tools-row { border-top: 1px solid var(--border); padding-top: 28px; }
+    .tools-label { font-size: 0.65rem; letter-spacing: 0.22em; text-transform: uppercase; color: var(--accent); margin-bottom: 16px; display: flex; align-items: center; gap: 12px; }
+    .tools-label::before { content: ''; display: inline-block; width: 18px; height: 1px; background: var(--accent); }
+    .tools-tags { display: flex; flex-wrap: wrap; gap: 8px; }
+    .tool-tag {
+      font-size: 0.72rem; letter-spacing: 0.08em;
+      color: var(--text-secondary);
+      border: 1px solid var(--border-strong);
+      padding: 6px 14px; border-radius: 2px;
+      transition: border-color 0.3s ease, color 0.3s ease;
+    }
+    .tool-tag:hover { border-color: var(--accent); color: var(--text); }
+
     /* TESTIMONIALS */
     #depoimentos { border-top: 1px solid var(--border); background: var(--bg-card); }
     .test-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2px; }
@@ -477,8 +495,6 @@
 
     /* RESPONSIVE */
     @media (max-width: 1024px) {
-      .test-grid { grid-template-columns: 1fr 1fr; }
-      .test-grid .test-card:last-child { grid-column: span 2; }
       .skills-layout { grid-template-columns: 1fr; gap: 44px; }
       .skills-intro { position: static; }
     }
@@ -525,15 +541,15 @@
         <span>B</span><span>R</span><span>U</span><span>N</span><span>A</span>
       </span>
       <span class="hero-name-line" id="hl2">
-        <span>L</span><span>A</span><span>C</span><span>R</span><span>O</span><span>I</span><span>X</span>
+        <span>L</span><span>A</span><span style="display:inline-block;width:0.28em"></span><span>C</span><span>R</span><span>O</span><span>I</span><span>X</span>
       </span>
     </h1>
     <div class="hero-mid">
       <div class="hero-rule-sm"></div>
-      <p class="hero-role">Design Estratégico · Branding · UX/UI</p>
+      <p class="hero-role">Discovery · Delivery · Growth · SaaS & B2B/B2C</p>
     </div>
     <div class="hero-bottom">
-      <p class="hero-tagline">Criando experiências que conectam marcas e pessoas através do design intencional e estratégia criativa.</p>
+      <p class="hero-tagline">Product Manager com +7 anos em produtos digitais end-to-end. OKRs · KPIs · Data-driven · Experimentação.</p>
       <a href="#cases" class="hero-cta">
         <span>Ver Cases</span>
         <span class="hero-cta-line"></span>
@@ -550,13 +566,13 @@
   <!-- SOBRE -->
   <section id="sobre">
     <div class="section-label reveal">Sobre Mim</div>
-    <h2 class="section-title reveal">Onde estratégia<br>encontra <em>criatividade</em></h2>
+    <h2 class="section-title reveal">Produto, dados<br>e <em>crescimento</em></h2>
     <div class="about-grid">
       <div class="about-text reveal d1">
-        <p>Sou designer e estrategista criativa com mais de <strong>7 anos de experiência</strong> transformando desafios de negócios em soluções visuais que geram resultado. Acredito que o bom design não é apenas belo — ele resolve problemas.</p>
-        <p>Minha abordagem combina <strong>pesquisa profunda</strong>, pensamento estratégico e execução criativa refinada para entregar projetos que não apenas impressionam visualmente, mas criam <strong>impacto real</strong> para as marcas que atendo.</p>
-        <p>Do briefing ao entregável final, estou comprometida com a excelência em cada detalhe.</p>
-        <div class="about-sig">Bruna Lacroix</div>
+        <p>Tenho mais de <strong>7 anos de experiência</strong> em produtos digitais end-to-end, em startups SaaS B2B e B2C. Gerenciei backlog, roadmap e priorização de entregas de alto valor, colaborando com squads multifuncionais para alinhar negócio e tecnologia aos objetivos estratégicos.</p>
+        <p>Iniciei carreira no <strong>Twitter</strong> gerenciando performance de mídia paga para o Governo. Na <strong>Ribon</strong> (founding team e primeira funcionária), liderei growth em aquisição, ativação, retenção e conversão — escalando a base de usuários de <strong>4 mil para +100 mil ativos</strong> e elevando a conversão de doadores pagos de <strong>0,03% para 1%</strong>.</p>
+        <p>Graduada em Administração pela <strong>UnB</strong> e com formação em Product Manager pela <strong>PM3</strong>. Fluente em inglês, perfil orientado a resultados e foco em experiência do usuário.</p>
+        <div class="about-sig">Bruna La Croix</div>
       </div>
       <div class="about-stats reveal d2">
         <div class="stat">
@@ -564,16 +580,16 @@
           <div class="stat-l">Anos de Experiência</div>
         </div>
         <div class="stat">
-          <div class="stat-n">80<sup>+</sup></div>
-          <div class="stat-l">Projetos Entregues</div>
+          <div class="stat-n">100K<sup>+</sup></div>
+          <div class="stat-l">Usuários Ativos</div>
         </div>
         <div class="stat">
-          <div class="stat-n">45<sup>+</sup></div>
-          <div class="stat-l">Clientes Atendidos</div>
+          <div class="stat-n">33<sup>×</sup></div>
+          <div class="stat-l">Crescimento de Conversão</div>
         </div>
         <div class="stat">
-          <div class="stat-n">12<sup>+</sup></div>
-          <div class="stat-l">Prêmios & Menções</div>
+          <div class="stat-n">3</div>
+          <div class="stat-l">Cases Documentados</div>
         </div>
       </div>
     </div>
@@ -582,19 +598,19 @@
   <!-- CASES -->
   <section id="cases">
     <div class="section-label reveal">Cases</div>
-    <h2 class="section-title reveal">Trabalhos<br><em>selecionados</em></h2>
-    <div class="cases-grid">
+    <h2 class="section-title reveal">Cases<br><em>selecionados</em></h2>
+    <div class="cases-grid" style="grid-template-columns:1fr 1fr;">
 
       <div class="case-card c1 reveal">
         <div class="case-visual"></div>
         <div class="case-inner">
           <div class="case-top">
             <span class="case-num">01</span>
-            <span class="case-tag">Branding</span>
+            <span class="case-tag">Conversão & Growth</span>
           </div>
           <div>
-            <h3 class="case-title">Renova Estúdio —<br>Identidade Visual</h3>
-            <p class="case-desc">Rebranding completo para estúdio de arquitetura, elevando o posicionamento de mercado e aumentando o reconhecimento da marca em 60%.</p>
+            <h3 class="case-title">De 0,03% para 1%<br>de conversão</h3>
+            <p class="case-desc">Implementei cultura de experimentação com testes A/B end-to-end na Ribon, elevando a conversão de doadores pagos em mais de 33×.</p>
             <a href="#" class="case-link">Ver Case <span class="case-link-line"></span> →</a>
           </div>
         </div>
@@ -605,41 +621,26 @@
         <div class="case-inner">
           <div class="case-top">
             <span class="case-num">02</span>
-            <span class="case-tag">UX/UI Design</span>
+            <span class="case-tag">Aquisição de Usuários</span>
           </div>
           <div>
-            <h3 class="case-title">Flora App —<br>Redesign de Produto</h3>
-            <p class="case-desc">Redesign da experiência completa de um app de bem-estar, resultando em 45% de aumento nas conversões e redução do churn em 30%.</p>
+            <h3 class="case-title">Dobrando a aquisição<br>de usuários</h3>
+            <p class="case-desc">Estratégia de growth que escalou a base de usuários ativos da Ribon de 4 mil para mais de 100 mil, com foco em aquisição e retenção.</p>
             <a href="#" class="case-link">Ver Case <span class="case-link-line"></span> →</a>
           </div>
         </div>
       </div>
 
-      <div class="case-card c3 reveal d2">
+      <div class="case-card c3 reveal d2" style="grid-column:span 2;">
         <div class="case-visual"></div>
         <div class="case-inner">
           <div class="case-top">
             <span class="case-num">03</span>
-            <span class="case-tag">Marketing Digital</span>
+            <span class="case-tag">Estratégia de Produto</span>
           </div>
           <div>
-            <h3 class="case-title">Verda Market —<br>Campanha 360°</h3>
-            <p class="case-desc">Estratégia de conteúdo e campanha digital para e-commerce sustentável, gerando 300% de crescimento orgânico em 6 meses.</p>
-            <a href="#" class="case-link">Ver Case <span class="case-link-line"></span> →</a>
-          </div>
-        </div>
-      </div>
-
-      <div class="case-card c4 reveal d3">
-        <div class="case-visual"></div>
-        <div class="case-inner">
-          <div class="case-top">
-            <span class="case-num">04</span>
-            <span class="case-tag">Estratégia de Marca</span>
-          </div>
-          <div>
-            <h3 class="case-title">Lumina Capital —<br>Posicionamento Premium</h3>
-            <p class="case-desc">Desenvolvimento de estratégia de marca e comunicação para gestora de investimentos entrando no segmento de alta renda.</p>
+            <h3 class="case-title">De B2C para B2B</h3>
+            <p class="case-desc">Liderança da transição estratégica de modelo de negócio, conduzindo discovery, roadmap e delivery para expansão ao mercado corporativo mantendo a operação B2C ativa.</p>
             <a href="#" class="case-link">Ver Case <span class="case-link-line"></span> →</a>
           </div>
         </div>
@@ -651,22 +652,43 @@
   <!-- SKILLS -->
   <section id="skills">
     <div class="section-label reveal">Habilidades</div>
-    <h2 class="section-title reveal">Ferramentas &<br><em>especialidades</em></h2>
+    <h2 class="section-title reveal">Competências &<br><em>ferramentas</em></h2>
     <div class="skills-layout">
       <div class="skills-intro reveal">
-        <p>Minha caixa de ferramentas é ampla e em constante evolução. Combino habilidades técnicas com uma visão estratégica apurada para entregar soluções completas.</p>
+        <p>Combino visão estratégica de produto com cultura de experimentação e orientação a dados para entregar crescimento sustentável e experiências que geram impacto real.</p>
         <br>
-        <p>Cada projeto é uma oportunidade de aplicar o conjunto certo de competências para alcançar o resultado desejado.</p>
+        <div class="lang-list">
+          <div class="lang-item"><span class="lang-name">Português</span><span class="lang-level">Nativo</span></div>
+          <div class="lang-item"><span class="lang-name">Inglês</span><span class="lang-level">Fluente</span></div>
+          <div class="lang-item"><span class="lang-name">Espanhol</span><span class="lang-level">Intermediário</span></div>
+        </div>
       </div>
       <div>
-        <div class="skill-item reveal"      > <div class="skill-left"><span class="skill-idx">01</span><span class="skill-name">Branding & Identidade Visual</span></div> <div class="skill-right"><div class="skill-bar"><div class="skill-fill" style="--w:95%"></div></div><span class="skill-cat">Design</span></div> </div>
-        <div class="skill-item reveal d1"   > <div class="skill-left"><span class="skill-idx">02</span><span class="skill-name">UX/UI Design</span></div> <div class="skill-right"><div class="skill-bar"><div class="skill-fill" style="--w:90%"></div></div><span class="skill-cat">Design</span></div> </div>
-        <div class="skill-item reveal d2"   > <div class="skill-left"><span class="skill-idx">03</span><span class="skill-name">Estratégia de Conteúdo</span></div> <div class="skill-right"><div class="skill-bar"><div class="skill-fill" style="--w:85%"></div></div><span class="skill-cat">Marketing</span></div> </div>
-        <div class="skill-item reveal d3"   > <div class="skill-left"><span class="skill-idx">04</span><span class="skill-name">Design Thinking</span></div> <div class="skill-right"><div class="skill-bar"><div class="skill-fill" style="--w:93%"></div></div><span class="skill-cat">Metodologia</span></div> </div>
-        <div class="skill-item reveal d4"   > <div class="skill-left"><span class="skill-idx">05</span><span class="skill-name">Marketing Digital</span></div> <div class="skill-right"><div class="skill-bar"><div class="skill-fill" style="--w:80%"></div></div><span class="skill-cat">Marketing</span></div> </div>
-        <div class="skill-item reveal"      > <div class="skill-left"><span class="skill-idx">06</span><span class="skill-name">Figma & Adobe Suite</span></div> <div class="skill-right"><div class="skill-bar"><div class="skill-fill" style="--w:97%"></div></div><span class="skill-cat">Ferramentas</span></div> </div>
-        <div class="skill-item reveal d1"   > <div class="skill-left"><span class="skill-idx">07</span><span class="skill-name">Gestão de Projetos</span></div> <div class="skill-right"><div class="skill-bar"><div class="skill-fill" style="--w:78%"></div></div><span class="skill-cat">Gestão</span></div> </div>
-        <div class="skill-item reveal d2"   > <div class="skill-left"><span class="skill-idx">08</span><span class="skill-name">Motion Design</span></div> <div class="skill-right"><div class="skill-bar"><div class="skill-fill" style="--w:68%"></div></div><span class="skill-cat">Design</span></div> </div>
+        <div class="skill-item reveal"   > <div class="skill-left"><span class="skill-idx">01</span><span class="skill-name">Product Discovery</span></div> <div class="skill-right"><div class="skill-bar"><div class="skill-fill" style="--w:96%"></div></div><span class="skill-cat">Produto</span></div> </div>
+        <div class="skill-item reveal d1"> <div class="skill-left"><span class="skill-idx">02</span><span class="skill-name">Product Management</span></div> <div class="skill-right"><div class="skill-bar"><div class="skill-fill" style="--w:95%"></div></div><span class="skill-cat">Produto</span></div> </div>
+        <div class="skill-item reveal d2"> <div class="skill-left"><span class="skill-idx">03</span><span class="skill-name">Growth Strategies</span></div> <div class="skill-right"><div class="skill-bar"><div class="skill-fill" style="--w:93%"></div></div><span class="skill-cat">Growth</span></div> </div>
+        <div class="skill-item reveal d3"> <div class="skill-left"><span class="skill-idx">04</span><span class="skill-name">Product Strategy</span></div> <div class="skill-right"><div class="skill-bar"><div class="skill-fill" style="--w:90%"></div></div><span class="skill-cat">Estratégia</span></div> </div>
+        <div class="skill-item reveal d4"> <div class="skill-left"><span class="skill-idx">05</span><span class="skill-name">Agile Methodologies</span></div> <div class="skill-right"><div class="skill-bar"><div class="skill-fill" style="--w:92%"></div></div><span class="skill-cat">Processo</span></div> </div>
+        <div class="skill-item reveal"   > <div class="skill-left"><span class="skill-idx">06</span><span class="skill-name">User Experience (UX)</span></div> <div class="skill-right"><div class="skill-bar"><div class="skill-fill" style="--w:88%"></div></div><span class="skill-cat">Design</span></div> </div>
+        <div class="skill-item reveal d1"> <div class="skill-left"><span class="skill-idx">07</span><span class="skill-name">Design Sprints</span></div> <div class="skill-right"><div class="skill-bar"><div class="skill-fill" style="--w:85%"></div></div><span class="skill-cat">Metodologia</span></div> </div>
+        <div class="skill-item reveal d2"> <div class="skill-left"><span class="skill-idx">08</span><span class="skill-name">Metrics & Data-driven</span></div> <div class="skill-right"><div class="skill-bar"><div class="skill-fill" style="--w:91%"></div></div><span class="skill-cat">Dados</span></div> </div>
+        <div class="skill-item reveal d3"> <div class="skill-left"><span class="skill-idx">09</span><span class="skill-name">Product Design</span></div> <div class="skill-right"><div class="skill-bar"><div class="skill-fill" style="--w:82%"></div></div><span class="skill-cat">Design</span></div> </div>
+        <div class="skill-item reveal d4"> <div class="skill-left"><span class="skill-idx">10</span><span class="skill-name">Mixpanel & Analytics</span></div> <div class="skill-right"><div class="skill-bar"><div class="skill-fill" style="--w:87%"></div></div><span class="skill-cat">Dados</span></div> </div>
+
+        <div class="tools-row reveal" style="margin-top:40px;">
+          <div class="tools-label">Ferramentas</div>
+          <div class="tools-tags">
+            <span class="tool-tag">Figma</span>
+            <span class="tool-tag">Notion</span>
+            <span class="tool-tag">Jira</span>
+            <span class="tool-tag">Google Analytics</span>
+            <span class="tool-tag">Miro</span>
+            <span class="tool-tag">Typeform</span>
+            <span class="tool-tag">ChatGPT</span>
+            <span class="tool-tag">Lovable</span>
+            <span class="tool-tag">n8n</span>
+          </div>
+        </div>
       </div>
     </div>
   </section>
@@ -674,38 +696,49 @@
   <!-- DEPOIMENTOS -->
   <section id="depoimentos">
     <div class="section-label reveal">Depoimentos</div>
-    <h2 class="section-title reveal">O que dizem<br>os <em>clientes</em></h2>
-    <div class="test-grid">
+    <h2 class="section-title reveal">O que colegas<br>e líderes <em>dizem</em></h2>
+    <div class="test-grid" style="grid-template-columns:1fr 1fr;">
       <div class="test-card reveal">
         <span class="test-quote-mark">"</span>
-        <p class="test-text">A Bruna transformou completamente a forma como nossa marca se comunica. O processo foi incrivelmente fluido e o resultado superou todas as expectativas. Nossa identidade agora traduz exatamente quem somos.</p>
+        <p class="test-text">A Bruna foi muito além do papel de Growth Manager na Ribon — em quase sete anos, ela ajudou a moldar a cultura, resolver problemas estruturais e construir estratégias do zero. Liderou times de marketing, dados e produto, sendo peça-chave para escalar o app de 2 mil para 100 mil usuários ativos por mês. Com uma capacidade única de identificar gargalos, montar times e garantir entregas, ela não só fez a Ribon crescer, mas trouxe uma visão estratégica afiada e orientada a dados.</p>
         <div class="test-author">
-          <div class="test-avatar">AM</div>
+          <div class="test-avatar">RR</div>
           <div>
-            <div class="test-name">Ana Martins</div>
-            <div class="test-role">Fundadora, Renova Estúdio</div>
+            <div class="test-name">Rafael Rodeiro</div>
+            <div class="test-role">Ribon</div>
           </div>
         </div>
       </div>
       <div class="test-card reveal d1">
         <span class="test-quote-mark">"</span>
-        <p class="test-text">Trabalhar com a Bruna foi uma experiência transformadora. Ela não só entende de design — ela entende de negócios. O redesign do app mudou completamente nossos números de retenção e conversão.</p>
+        <p class="test-text">A Bruna é uma profissional excepcional, com uma habilidade única para estruturar times e criar processos eficientes. Extremamente orientada a dados, ela toma decisões bem fundamentadas, sempre buscando entender o contexto com números e evidências. Resiliente, organizada e altamente eficiente, Bruna é o tipo de profissional que qualquer empresa teria sorte em ter no time. Trabalharia com ela novamente sem pensar duas vezes!</p>
         <div class="test-author">
-          <div class="test-avatar">RC</div>
+          <div class="test-avatar">CJ</div>
           <div>
-            <div class="test-name">Ricardo Costa</div>
-            <div class="test-role">CEO, Flora Digital</div>
+            <div class="test-name">Carlos Junior</div>
+            <div class="test-role">Colega de Equipe</div>
           </div>
         </div>
       </div>
       <div class="test-card reveal d2">
         <span class="test-quote-mark">"</span>
-        <p class="test-text">Impressionante como a Bruna capturou a essência premium da nossa gestora em cada detalhe. A estratégia de marca que ela desenvolveu nos ajudou a conquistar exatamente o segmento que queríamos atingir.</p>
+        <p class="test-text">Tive o enorme prazer de trabalhar com a Bruna na Ribon, e ela é, sem dúvida, uma das melhores profissionais com quem já colaborei. Sua capacidade de adaptação é verdadeiramente notável. A Bruna entrega em um nível excepcional — você nunca precisa cobrar por atualizações, ela mantém todos informados de forma proativa. Seu talento especial está em growth product, onde se destaca na otimização de métricas de funil e na geração de impacto.</p>
         <div class="test-author">
-          <div class="test-avatar">PF</div>
+          <div class="test-avatar">LB</div>
           <div>
-            <div class="test-name">Paulo Ferreira</div>
-            <div class="test-role">Sócio-Diretor, Lumina Capital</div>
+            <div class="test-name">Luísa Brito</div>
+            <div class="test-role">Colega na Ribon</div>
+          </div>
+        </div>
+      </div>
+      <div class="test-card reveal d3">
+        <span class="test-quote-mark">"</span>
+        <p class="test-text">A Bruna tem fortes habilidades de liderança e uma mentalidade estratégica orientada por dados. Trabalhando com ela, aprendi muito sobre estratégias de growth, aquisição e retenção, e como avaliar riscos para tomar decisões melhores. Ela sabe como liderar um time, extraindo o melhor de cada membro e tornando o caminho agradável. A recomendo fortemente para qualquer time que busca uma líder forte e orientada a resultados.</p>
+        <div class="test-author">
+          <div class="test-avatar">MH</div>
+          <div>
+            <div class="test-name">Murilo Hiratomi</div>
+            <div class="test-role">Colega de Equipe</div>
           </div>
         </div>
       </div>
@@ -742,7 +775,7 @@
 
   <!-- FOOTER -->
   <footer>
-    <span class="footer-logo">Bruna Lacroix</span>
+    <span class="footer-logo">Bruna La Croix</span>
     <span class="footer-copy">© 2025 — Todos os direitos reservados</span>
     <a href="#hero" class="footer-top">↑ Topo</a>
   </footer>
